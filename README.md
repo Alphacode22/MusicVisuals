@@ -1,8 +1,8 @@
 # Music Visualiser Project
 
-Name:
+Name: Alex Bang
 
-Student Number: 
+Student Number: C19409486
 
 ## Instructions
 - Fork this repository and use it a starter project for your assignment
@@ -20,6 +20,19 @@ Student Number:
 # What I am most proud of in the assignment
 
 # Markdown Tutorial
+
+# References(Added Here)
+- Waves
+https://www.youtube.com/watch?v=Z75WXere7bg 
+
+- Purple Rain
+https://www.youtube.com/watch?v=KkyIDI6rQJI
+
+- Homing Missles
+https://www.youtube.com/watch?v=pRYMy5uQSpo
+
+
+
 
 This is *emphasis*
 
