@@ -31,12 +31,12 @@ public class AlexVisual extends Visual{
     public void setup(){
         colorMode(HSB);
         noCursor();
-        
         setFrameSize(256);
 
         startMinim();
         for(int i=0; i<drops.length; i++){
             drops[i]= new Drop();
+            //System.out.println("Reloading");
         }
         loadAudio("heroplanet.mp3");
     }
@@ -49,9 +49,6 @@ public class AlexVisual extends Visual{
         {
             case 0:
             {
-    
-            }                
-            case 1:
                 fill(50, 255, 255);                                    
                 if (mouseX < cx && mouseY < cy)
                 {
@@ -70,15 +67,23 @@ public class AlexVisual extends Visual{
                     rect(cx, cy, cx, cy);
                 }
                 break;
+            }  
+            //Waves              
+            case 1:
+            {
+               
+            }
+            //Purple rain
             case 2:
             {
-                //Purple rain
+                
+                background(100, 0, 10);
                 for(int i=0; i<drops.length; i++){
-                    drops[i]= new Drop();
-                    drops[i].fall();
                     drops[i].show();
+                    drops[i].fall();
+                    //System.out.println("Shoot");
                 }
-
+                break;
             }
             case 3:
             {

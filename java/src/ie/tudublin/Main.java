@@ -7,25 +7,23 @@ import example.RotatingAudioBands;
 
 public class Main
 {	
-
+	public static AlexVisual av = new AlexVisual();
 	public void startUI()
 	{
 		String[] a = {"MAIN"};
         processing.core.PApplet.runSketch( a, new MyVisual());		
 	}
 
-	public static AlexVisual myUI()
+	public void myUI()
 	{
-		AlexVisual av = new AlexVisual();
 		String[] a = {"MAIN"};
-        processing.core.PApplet.runSketch( a, av);	
-		return av;	
+        processing.core.PApplet.runSketch( a, av);		
 	}
 	
 
 	public static void main(String[] args)
 	{
-		//Main main = new Main();
-		Main.myUI();			
+		Main main = new Main();
+		main.myUI();			
 	}
 }

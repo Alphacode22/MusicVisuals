@@ -6,7 +6,8 @@ import ie.tudublin.Main;
 
 public class Drop  {
 
-    AlexVisual av = Main.myUI();
+    //temporary variable
+    AlexVisual av = Main.av;
 
     float x = av.random(av.width);
     float y = av.random(-500, -50);
@@ -27,7 +28,9 @@ public class Drop  {
 
     void show(){
         float thick = PApplet.map(z, 0, 20 , 1, 3);
-        av.stroke(138, 43, 226);
-        av.line(x, y, x, y+10);
+        av.strokeWeight(thick);
+        //av.stroke(138, 43, 226);
+        av.stroke(240, 100, 100);
+        av.line(x, y, x, y+len); 
     }
 }
