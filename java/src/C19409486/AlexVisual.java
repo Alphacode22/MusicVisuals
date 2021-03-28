@@ -41,7 +41,7 @@ public class AlexVisual extends Visual{
         loadAudio("heroplanet.mp3");
     }
 
-  
+    //float wave1 =0;
     public void draw(){
         background(0);
         noStroke();
@@ -67,14 +67,17 @@ public class AlexVisual extends Visual{
                     rect(cx, cy, cx, cy);
                 }
                 break;
-            }  
-            //Waves              
-            case 1:
+            }        
+            case 1: //Waves 
             {
-               
+//                 background(0);
+//                 fill(255);
+//                 noStroke();
+//                 float wave1 = sin(radians(frameCount));
+//                 ellipse(width/2 + wave1 * 300, height/2, 100, 100);
+                break;
             }
-            //Purple rain
-            case 2:
+            case 2: //Purple rain
             {
                 
                 background(100, 0, 10);
