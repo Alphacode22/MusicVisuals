@@ -1,15 +1,16 @@
 package example;
 
+import C19409486.AlexVisual;
 import processing.core.*;
 
 // This is an example of a visual that uses the audio bands
 public class AudioBandsVisual
 {
-    MyVisual mv;
+    AlexVisual mv;
 
-    public AudioBandsVisual(MyVisual mv)
+    public AudioBandsVisual(AlexVisual alexVisual)
     {
-        this.mv = mv; 
+        this.mv = alexVisual; 
     }
 
     public void render()
