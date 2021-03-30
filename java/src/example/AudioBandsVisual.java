@@ -6,11 +6,11 @@ import processing.core.*;
 // This is an example of a visual that uses the audio bands
 public class AudioBandsVisual
 {
-    AlexVisual mv;
+    MyVisual mv;
 
-    public AudioBandsVisual(AlexVisual alexVisual)
+    public AudioBandsVisual(MyVisual myVisual)
     {
-        this.mv = alexVisual; 
+        this.mv = myVisual; 
     }
 
     public void render()

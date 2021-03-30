@@ -23,14 +23,14 @@ public class MyVisual extends Visual
         startMinim();
                 
         // Call loadAudio to load an audio file to process 
-        loadAudio("heroplanet.mp3");   
+        loadAudio("Disfigure.mp3");   
 
         
         // Call this instead to read audio from the microphone
         //startListening(); 
         
-        // wf = new WaveForm(this);
-        // abv = new AudioBandsVisual(this);
+        wf = new WaveForm(this);
+        abv = new AudioBandsVisual(this);
     }
 
     public void keyPressed()
