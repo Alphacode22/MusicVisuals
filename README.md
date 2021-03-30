@@ -35,6 +35,17 @@ https://www.youtube.com/watch?v=17WoOqgXsRM
 https://www.youtube.com/watch?v=pRYMy5uQSpo
 
 
+- Music Attribution
+Song: Disfigure - Blank [NCS Release]
+Music provided by NoCopyrightSounds
+Free Download/Stream: http://ncs.io/blank
+Watch: http://youtu.be/p7ZsBPK656s
+
+Song: Awake The Light - Borrtex
+Music provided by Borrtex
+Free Download/Stream: https://borrtex.bandcamp.com/
+Watch: https://www.youtube.com/watch?v=g20lxnMwcoM
+
 
 
 
