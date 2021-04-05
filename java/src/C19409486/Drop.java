@@ -1,7 +1,6 @@
 package C19409486;
 
 import processing.core.PApplet;
-import C19409486.AlexVisual;
 import ie.tudublin.Main;
 
 public class Drop  {

@@ -34,6 +34,9 @@ https://www.youtube.com/watch?v=17WoOqgXsRM
 - Homing Missles
 https://www.youtube.com/watch?v=pRYMy5uQSpo
 
+- Bouncing Balls
+https://www.youtube.com/watch?v=YIKRXl3wH8Y
+
 
 - Music Attribution
 Song: Disfigure - Blank [NCS Release]
@@ -46,7 +49,9 @@ Music provided by Borrtex
 Free Download/Stream: https://borrtex.bandcamp.com/
 Watch: https://www.youtube.com/watch?v=g20lxnMwcoM
 
-
+- Helpful links
+https://processing.org/reference/
+https://stackoverflow.com/questions/
 
 
 
