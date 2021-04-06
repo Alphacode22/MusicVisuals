@@ -221,7 +221,7 @@ public class AlexVisual extends Visual{
                 //background(100, 0, 10);
                 for(int i=0; i<drops.length; i++){
                     drops[i].show();
-                    drops[i].fall();
+                    drops[i].update();
                 }
                 break;
             }

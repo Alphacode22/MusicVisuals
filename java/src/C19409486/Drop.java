@@ -14,7 +14,7 @@ public class Drop  {
     float len = PApplet.map(z, 0, 20, 10, 20);
     float yspeed = PApplet.map(z, 0, 20, 10, 20);
 
-    void fall(){
+    void update(){
         y = y +yspeed;
         float grav = PApplet.map(z, 0, 20, 0, (float) 0.2);
         yspeed = yspeed +grav;
