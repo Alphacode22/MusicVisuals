@@ -4,6 +4,7 @@ import ddf.minim.AudioBuffer;
 import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
+import ddf.minim.analysis.FFT;
 import example.AudioBandsVisual;
 import example.WaveForm;
 import ie.tudublin.Main;
@@ -57,6 +58,7 @@ public class AlexVisual extends Visual{
         // wf = new WaveForm(this);
         // abv = new AudioBandsVisual(this);
 
+        //Instance 
         for(int i=0; i<drops.length; i++){
             drops[i]= new Drop();
         }
@@ -110,8 +112,11 @@ public class AlexVisual extends Visual{
 
         switch (mode)
         {
+            //The Ampitude lines
             case 0:
             {
+                float[] _bands;
+                float w = width/ 64;
                 // Iterate over all the elements in the audio buffer
                 for (int i = 0; i < ab.size(); i++) {
 
@@ -121,8 +126,21 @@ public class AlexVisual extends Visual{
 
                     line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
                 }  
+
+                calculateFrequencyBands();
+                // for(int i=0; i < getBands().length; i++){
+                //      _bands = getBands();
+                //      float myAmp = _bands[i];
+                //      float y = map(myAmp, 0, 256, height, 0);
+                //      rect(i * w, height, i * w, y);
+                // }
+                // stroke(255);
+                //noFill();
+
+                
                 break;      
             }
+            //Weird vertex
             case 1:
             {
                 for (int i = 0; i < ab.size(); i++) {
@@ -135,96 +153,68 @@ public class AlexVisual extends Visual{
                 } 
                 break; 
             }
+             //Weird vertex222
             case 2:
             {
-                for (int i = 0; i < ab.size(); i++) {
-
-                    float c = map(i, 0, ab.size(), 0, 255);
-                    stroke(c, 255, 255);
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
-
-                    ellipse(i,  halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
-                } 
-                break; 
+                fill(100, 0, 0);
+                rect(0, 0, 200, 200);
+                break;
             }
-            // case 2:
+            //Weird vertex
+            // case 4:
             // {
-           
-            //     fill(100); 
-            //     stroke(255);
-            //     line(cx, cy,myX ,myY);
-                
-            //     break; 
+            //     background(0, 100, 100);
+            //     fill(50, 100, 100);
+            //     circle(cx, cy, 400);
+            //     fill(180, 100, 100);
+            //     triangle(400, 200, 200, 600, 600, 600);
+            //     fill(0, 0, 70);
+            //     ellipse(cx, cy, 200, 100);
+            //     fill(0, 0, 0);
+            //     circle(cx, cy, 50);
+            //     break;
             // }
-            // case 3:
+            //Cube spawner
+            // case 7:
             // {
-            //     background(0);
-            //     calculateAverageAmplitude();
-            //     stroke(map(getSmoothedAmplitude(), 0, 1, 0, 255), 255, 255);
-            //     strokeWeight(5);
-            //     noFill();
-            //     lights();
-            //     pushMatrix();
-            //     //
-            //     camera(0, 0, 0, 0, 0, -1, 0, 1, 0);
-            //     translate(0, 0, -200);
-            //     rotateX(angle);
-            //     rotateZ(angle);       
-            //     float boxSize = 50 + (200 * getSmoothedAmplitude()); 
-            //     box(boxSize);   
-            //     popMatrix();
-            //     angle += 0.01f;
+                // Cube cube= new Cube(Main.av, 0);
+                // cube.show();
+                // cube.update();
+                // break;
             // }
-            // case 6:
+            //Shooting stars
+            // case 8:
             // {
+            //     //background(0);
             //     for (int i = 0; i < ab.size(); i++) {
 
             //         float c = map(i, 0, ab.size(), 0, 255);
             //         stroke(c, 255, 255);
             //         lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
 
-            //         ellipse(i,  halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
-            //     } 
-            //     break; 
-            // }
-            case 7:
-            {
-                Cube cube= new Cube(Main.av, 0);
-                cube.show();
-                cube.update();
-                break;
-            }
-            case 8:
-            {
-                //background(0);
-                for (int i = 0; i < ab.size(); i++) {
-
-                    float c = map(i, 0, ab.size(), 0, 255);
-                    stroke(c, 255, 255);
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
-
-                    line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
+            //         line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
                   
-                }  
+            //     }  
               
-                speed = map(mouseX, 0, width, 0, 20);
-                translate(width/2, height/2);
-                for(int i=0;i< stars.length; i++){
-                    stars[i].update();
-                    stars[i].show();
-                }
-                break;
+            //     speed = map(mouseX, 0, width, 0, 20);
+            //     translate(width/2, height/2);
+            //     for(int i=0;i< stars.length; i++){
+            //         stars[i].update();
+            //         stars[i].show();
+            //     }
+            //     break;
                 
-            }
-            case 9: 
-            {
-                //background(100, 0, 10);
-                for(int i=0; i<drops.length; i++){
-                    drops[i].show();
-                    drops[i].update();
-                }
-                break;
-            }
+            // }
+            // //Raindrops lets
+            // case 9: 
+            // {
+            //     //background(100, 0, 10);
+            //     for(int i=0; i<drops.length; i++){
+            //         drops[i].show();
+            //         drops[i].update();
+            //     }
+            //     break;
+            // }
         }
     }
 }
