@@ -5,6 +5,7 @@ import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import ddf.minim.analysis.FFT;
+import ddf.minim.analysis.FourierTransform;
 import example.AudioBandsVisual;
 import example.WaveForm;
 import ie.tudublin.Main;
@@ -21,6 +22,9 @@ public class AlexVisual extends Visual{
     AudioInput ai; // How to connect to mic
     AudioPlayer ap;
     AudioBuffer ab; // Samples
+
+    float[] bands;
+    float[] smoothedBands;
 
     Drop[] drops = new Drop[100];
     Star[] stars = new Star[800];
@@ -58,6 +62,10 @@ public class AlexVisual extends Visual{
         // wf = new WaveForm(this);
         // abv = new AudioBandsVisual(this);
 
+        
+        bands = new float[(int) log2(width)];
+        smoothedBands = new float[bands.length];
+
         //Instance 
         for(int i=0; i<drops.length; i++){
             drops[i]= new Drop();
@@ -79,6 +87,10 @@ public class AlexVisual extends Visual{
             }
         }
  
+    }
+
+    float log2(float f) {
+        return log(f) / log(2.0f);
     }
 
     float lerpedAverage = 0;
@@ -137,7 +149,46 @@ public class AlexVisual extends Visual{
                 // stroke(255);
                 //noFill();
 
+                halfHeight = height / 2;
+                for(int i = 0 ; i < ab.size() ; i ++)
+                {
+                    stroke(map(i, 0, ab.size(), 0, 255), 255, 255);
+                    //line(i, halfHeight - (ab.get(i) * halfHeight), i, halfHeight + (ab.get(i) * halfHeight));
+                }
+
+                FourierTransform fft = new FFT(width, 44100);
+                fft.window(FFT.HAMMING);
+                fft.forward(ab);
+        
+                int highestBand = 0;
+                for(int i = 0 ; i < fft.specSize() ; i ++)
+                {
+                    stroke(map(i, 0, fft.specSize(), 0, 255), 255, 255);
+                    line(i, height, i, height - (fft.getBand(i) * halfHeight));
+                    if (fft.getBand(i) > fft.getBand(highestBand))
+                    {
+                        highestBand = i;
+                    }
+                }
+        
+                float freq = fft.indexToFreq(highestBand);
+                // textSize(24);
+                // fill(255);
+                // text("Frequency: " + freq, 10, 50);
+                // text("Note: " + spell(freq), 10, 100);
+        
+                calculateFrequencyBands();
+        
                 
+                w = width / (float) bands.length;
+                for(int i = 0 ; i < bands.length ; i ++)
+                {
+                    float x = map(i, 0, bands.length, 0, width);
+                    float c = map(i, 0, bands.length, 0, 255);
+                    noStroke();
+                    fill(c, 255, 255);
+                    rect(x, height, w, -smoothedBands[i]);
+                }    
                 break;      
             }
             //Weird vertex
