@@ -12,7 +12,7 @@ import ie.tudublin.Main;
 import ie.tudublin.Visual;
 import ie.tudublin.VisualException;
 
-public class AlexVisual extends Visual{
+public class TemporaryHolder2 extends Visual{
     int mode=0;
     float cx;
     float cy;
@@ -207,4 +207,3 @@ public class AlexVisual extends Visual{
     }
 
 }
- 
