@@ -13,100 +13,86 @@ import ie.tudublin.Visual;
 import ie.tudublin.VisualException;
 
 public class AlexVisual extends Visual{
-    int mode=0;
-    float cx;
-    float cy;
-    float offset=0;
-    
-    Minim minim; // Connect to minim
-    AudioInput ai; // How to connect to mic
-    AudioPlayer ap;
-    AudioBuffer ab; // Samples
 
-    float[] bands;
-    float[] smoothedBands;
+    int mode;
 
-    Drop[] drops = new Drop[100];
-    Star[] stars = new Star[800];
-    float speed=0;
+
+    float lerpedAverage = 0;
+
 
     float[] lerpedBuffer;
 
-    float lerpedAverage = 0;
-    private float angle = 0;
 
-    float y = 200;
-    float lerpedY = y;
-
-    // float[] _bands;
-    // float[] _smoothedBands;
-
-    float w = width/ 64;
-
-    FFT fft;
-
-
-    public void settings() {
-        size(800, 800, P3D);
-        cx = width / 2;
-        cy = height / 2;   
-    }
-
-    public void setup(){
-        colorMode(HSB);
-        noCursor();
-        setFrameSize(256);
-
-        minim = new Minim(this);
-     
-        ap = minim.loadFile("Disfigure.mp3", width);
-        ap.play();
-        ab = ap.mix; // Connect the buffer to the mp3 file
-
-        colorMode(HSB);
-        lerpedBuffer = new float[width];
+    public void settings()
+    {
+        size(800, 800);
         
-        // _bands = new float[(int) log2(width)];
-        // _smoothedBands = new float[bands.length];
+        // Use this to make fullscreen
+        //fullScreen();
 
-        //fft = getFFT();
-
-        //Instance 
-        for(int i=0; i<drops.length; i++){
-            drops[i]= new Drop();
-        }
-        for(int i=0; i<stars.length; i++){
-            stars[i] = new Star();
-        }
+        // Use this to make fullscreen and use P3D for 3D graphics
+        //fullScreen(P3D, SPAN); 
+       
     }
 
-    public void keyPressed(){
+    public void setup()
+    {
+        colorMode(HSB);
+        startMinim();
+                
+        // Call loadAudio to load an audio file to process 
+        loadAudio("Disfigure.mp3");   
+
+        
+        // Call this instead to read audio from the microphone
+        //startListening();
+        lerpedBuffer = new float[width]; 
+    }
+
+    public void keyPressed()
+    {
+      
         if (keyCode >= '0' && keyCode <= '9')
             mode = keyCode - '0';
         if (keyCode == ' ') {
-            if (ap.isPlaying()) {
-                ap.pause();
+            if (getAudioPlayer().isPlaying()) {
+                getAudioPlayer().pause();
             } else {
-                ap.rewind();
-                ap.play();
+                getAudioPlayer().rewind();
+                getAudioPlayer().play();
             }
         }
- 
     }
 
-    public void draw(){
+    public void draw()
+    {
         background(0);
         noStroke(); 
         float halfHeight = height / 2;
         float average = 0;
         float sum = 0;
 
-        // Calculate the average of the buffer
-        for (int i = 0; i < ab.size(); i ++)
+        try
         {
-            sum += abs(ab.get(i));
+            // Call this if you want to use FFT data
+            calculateFFT(); 
         }
-        average = sum / ab.size();
+        catch(VisualException e)
+        {
+            e.printStackTrace();
+        }
+        // Call this is you want to use frequency bands
+        calculateFrequencyBands(); 
+
+        // Call this is you want to get the average amplitude
+        calculateAverageAmplitude();
+        
+        // Calculate the average of the buffer
+        for (int i = 0; i < getAudioBuffer().size(); i ++)
+        {
+            sum += abs(getAudioBuffer().get(i));
+        }
+        average = sum / getAudioBuffer().size();
 
         // Move lerpedAverage 10% closer to average every frame
         lerpedAverage = lerp(lerpedAverage, average, 0.1f);
@@ -117,23 +103,27 @@ public class AlexVisual extends Visual{
             case 0:
             {
                 // Iterate over all the elements in the audio buffer
-                for (int i = 0; i < ab.size(); i++) {
+                for (int i = 0; i < getAudioBuffer().size(); i++) {
 
-                    float c = map(i, 0, ab.size(), 0, 255);
+                    float c = map(i, 0, getAudioBuffer().size(), 0, 255);
                     stroke(c, 255, 255);
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
+                    lerpedBuffer[i] = lerp(lerpedBuffer[i], getAudioBuffer().get(i), 0.1f);
 
                     line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
                 }  
 
                 calculateFrequencyBands();
 
-                for(int i = 0; i < ab.size(); i++){
-                    stroke(map(i, 0, ab.size(), 0, 255), 255, 255);
-                    line(i, halfHeight - (ab.get(i)* halfHeight), i, halfHeight + (ab.get(i) * halfHeight));
+                for(int i = 0; i < getAudioBuffer().size(); i++){
+                    stroke(map(i, 0, getAudioBuffer().size(), 0, 255), 255, 255);
+                    line(i, halfHeight - (getAudioBuffer().get(i)* halfHeight), i, halfHeight + (getAudioBuffer().get(i) * halfHeight));
                 }
 
-                fft.window(FFT.HAMMING);
+                //calculateFFT();
+                for(int i=0; i < fft.specSize(); i++){
+                    stroke(map(i, 0 , getAudioBuffer().size(), 0 ,255), 255, 255);
+                    line(i, 0, i, fft.getBand(i) * halfHeight);
+                }
 
                 break; 
             }
@@ -201,10 +191,6 @@ public class AlexVisual extends Visual{
             // }
         }   
     }
-
-    float log2(float f) {
-        return log(f) / log(2.0f);
-    }
-
 }
- 
+
+
