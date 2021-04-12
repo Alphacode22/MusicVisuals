@@ -119,26 +119,17 @@ public class AlexVisual extends Visual{
                     stroke(map(i, 0, getAudioBuffer().size(), 0, 255), 255, 255);
                     //line(i, halfHeight - (getAudioBuffer().get(i)* halfHeight), i, halfHeight + (getAudioBuffer().get(i) * halfHeight));
                     strokeWeight(1);
-                    line(i, halfHeight + (getAudioBuffer().get(i)* halfHeight), i, halfHeight + (getAudioBuffer().get(i) * halfHeight));
+                    //line(i, halfHeight - (getAudioBuffer().get(i)* halfHeight), i, halfHeight + (getAudioBuffer().get(i) * halfHeight));
+                    //line(i, halfHeight - (getAudioBuffer().get(i)* halfHeight), i, halfHeight + (getAudioBuffer().get(i) * halfHeight));
+                    line(i*2, halfHeight + (getAudioBuffer().get(i)* halfHeight), i*2, halfHeight + (getAudioBuffer().get(i) * halfHeight));
+                    //line(i * 10, halfHeight + (getAudioBuffer().get(i)* halfHeight), i * 10, halfHeight + (getAudioBuffer().get(i) * halfHeight));
                 }
 
-                //calculateFFT();
-
                 //Frequency
-               
                 for(int i=0; i < getFFT().specSize(); i++){
                     stroke(map(i, 0 , getAudioBuffer().size(), 0 ,255), 255, 255);
-                    //line(i, 0, i, getFFT().getBand(i) * halfHeight);
-                    //line(i, 800, i, getFFT().getBand(i) * -1);
-                    //line(i, 0, i, 800);
-                    //int bandPoint = (int)getFFT().getBand(i) /  getBands().length;
-                    //line(i, 800, i, j * 700);
-                    // println(getFFT().getBand(i) * 400);
-                    // float bandPoint = getFFT().getBand(i) * 100;
-                    //line(i, 800, i, bandPoint);
                     strokeWeight(10);
                     strokeCap(PROJECT);
-                   // line(i* 10, height, i * 10, height - (getFFT().getBand(i) * halfHeight));
                     line(i* 10, height, i * 10, height - (getFFT().getBand(i)));
                 }
 
