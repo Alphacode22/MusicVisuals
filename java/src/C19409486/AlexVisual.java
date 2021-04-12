@@ -103,26 +103,43 @@ public class AlexVisual extends Visual{
             case 0:
             {
                 // Iterate over all the elements in the audio buffer
-                for (int i = 0; i < getAudioBuffer().size(); i++) {
+                // for (int i = 0; i < getAudioBuffer().size(); i++) {
 
-                    float c = map(i, 0, getAudioBuffer().size(), 0, 255);
-                    stroke(c, 255, 255);
-                    lerpedBuffer[i] = lerp(lerpedBuffer[i], getAudioBuffer().get(i), 0.1f);
+                //     float c = map(i, 0, getAudioBuffer().size(), 0, 255);
+                //     stroke(c, 255, 255);
+                //     lerpedBuffer[i] = lerp(lerpedBuffer[i], getAudioBuffer().get(i), 0.1f);
 
-                    line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
-                }  
+                //     line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
+                // }  
 
                 calculateFrequencyBands();
 
+                //Attitude //weird
                 for(int i = 0; i < getAudioBuffer().size(); i++){
                     stroke(map(i, 0, getAudioBuffer().size(), 0, 255), 255, 255);
-                    line(i, halfHeight - (getAudioBuffer().get(i)* halfHeight), i, halfHeight + (getAudioBuffer().get(i) * halfHeight));
+                    //line(i, halfHeight - (getAudioBuffer().get(i)* halfHeight), i, halfHeight + (getAudioBuffer().get(i) * halfHeight));
+                    strokeWeight(1);
+                    line(i, halfHeight + (getAudioBuffer().get(i)* halfHeight), i, halfHeight + (getAudioBuffer().get(i) * halfHeight));
                 }
 
                 //calculateFFT();
-                for(int i=0; i < fft.specSize(); i++){
+
+                //Frequency
+               
+                for(int i=0; i < getFFT().specSize(); i++){
                     stroke(map(i, 0 , getAudioBuffer().size(), 0 ,255), 255, 255);
-                    line(i, 0, i, fft.getBand(i) * halfHeight);
+                    //line(i, 0, i, getFFT().getBand(i) * halfHeight);
+                    //line(i, 800, i, getFFT().getBand(i) * -1);
+                    //line(i, 0, i, 800);
+                    //int bandPoint = (int)getFFT().getBand(i) /  getBands().length;
+                    //line(i, 800, i, j * 700);
+                    // println(getFFT().getBand(i) * 400);
+                    // float bandPoint = getFFT().getBand(i) * 100;
+                    //line(i, 800, i, bandPoint);
+                    strokeWeight(10);
+                    strokeCap(PROJECT);
+                   // line(i* 10, height, i * 10, height - (getFFT().getBand(i) * halfHeight));
+                    line(i* 10, height, i * 10, height - (getFFT().getBand(i)));
                 }
 
                 break; 
