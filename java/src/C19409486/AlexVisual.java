@@ -99,7 +99,7 @@ public class AlexVisual extends Visual{
 
         switch (mode)
         {
-            //The Ampitude lines
+            //The Amplitude lines
             case 0:
             {
                 // Iterate over all the elements in the audio buffer
@@ -114,7 +114,7 @@ public class AlexVisual extends Visual{
 
                 calculateFrequencyBands();
 
-                //Attitude //weird
+                //Amplitude //weird
                 for(int i = 0; i < getAudioBuffer().size(); i++){
                     stroke(map(i, 0, getAudioBuffer().size(), 0, 255), 255, 255);
                     //line(i, halfHeight - (getAudioBuffer().get(i)* halfHeight), i, halfHeight + (getAudioBuffer().get(i) * halfHeight));
