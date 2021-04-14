@@ -81,7 +81,7 @@ public class TemporaryHolder extends Visual{
                 
                 background(100, 0, 10);
                 for(int i=0; i<drops.length; i++){
-                    drops[i].show();
+                    drops[i].start();
                     drops[i].update();
                     //System.out.println("Shoot");
                 }

@@ -19,6 +19,25 @@ public class SecurityBeams {
         z = av.random(av.width);
     }
 
+    void start(){
+        // av.fill(120, 100, 55);
+        // av.noStroke();
+
+        float sx = PApplet.map(x/z, 0, 1, 0, av.width);
+        float sy = PApplet.map(y/z, 0, 1, 0, av.height);
+
+        // float r = PApplet.map(z, 0, av.width, 16, 0);
+        // av.ellipse(sx, sy, r, r);
+
+        //av.stroke(255);
+        av.stroke(120, 100, 55);
+        av.fill(120, 100, 55);
+        av.line(px, py, sx, sy);
+
+        px = sx;
+        py = sy;
+    }
+
     void update(){
         z = z -10;
         if(z < 1){
@@ -28,21 +47,5 @@ public class SecurityBeams {
         }
     }
 
-    void show(){
-        av.fill(255);
-        av.noStroke();
-
-        float sx = PApplet.map(x/z, 0, 1, 0, av.width);
-        float sy = PApplet.map(y/z, 0, 1, 0, av.height);
-
-        float r = PApplet.map(z, 0, av.width, 16, 0);
-        av.ellipse(sx, sy, r, r);
-
-        av.stroke(255);
-        av.line(px, py, sx, sy);
-
-        px = sx;
-        py = sy;
-    }
-
+    
 }//8.01

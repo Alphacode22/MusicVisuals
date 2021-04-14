@@ -16,15 +16,6 @@ public class StationaryStar {
         z = av.random(av.width);
     }
 
-    void update(){
-        z = z -1;
-        if(z < 1){
-            z = av.width;
-            x = av.random(-av.width, av.width);
-            y = av.random(-av.height, av.height);
-        }
-    }
-
     void show(){
         av.fill(255);
         av.noStroke();
@@ -35,4 +26,12 @@ public class StationaryStar {
         av.ellipse(sx, sy, 8, 8);
     }
 
+    void update(){
+        z = z -1;
+        if(z < 1){
+            z = av.width;
+            x = av.random(-av.width, av.width);
+            y = av.random(-av.height, av.height);
+        }
+    }
 }

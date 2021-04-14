@@ -13,10 +13,6 @@ public class Cube {
         this.angle = angle;
     }
 
-    void update(){
-      
-    }
-
     void show(){
         av.background(0);
         av.calculateAverageAmplitude();
@@ -35,6 +31,12 @@ public class Cube {
         av.popMatrix();
         angle += 0.01f;
     }
+
+    void update(){
+      
+    }
+
+  
 }
 
      

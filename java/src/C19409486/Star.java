@@ -19,17 +19,7 @@ public class Star {
         pz = z;
     }
 
-    void update(){
-        z = z -10;
-        if(z < 1){
-            z = av.width;
-            x = av.random(-av.width, av.width);
-            y = av.random(-av.height, av.height);
-            pz = z;
-        }
-    }
-
-    void show(){
+    void start(){
         av.fill(255);
         av.noStroke();
 
@@ -48,4 +38,13 @@ public class Star {
       
     }
 
+    void update(){
+        z = z -10;
+        if(z < 1){
+            z = av.width;
+            x = av.random(-av.width, av.width);
+            y = av.random(-av.height, av.height);
+            pz = z;
+        }
+    }
 }//8.01

@@ -14,24 +14,43 @@ import ie.tudublin.VisualException;
 
 public class AlexVisual extends Visual{
 
-    int mode;
+    private int mode;
+    private int cx, cy;
 
 
-    float lerpedAverage = 0;
+    private float lerpedAverage = 0;
+    private float[] lerpedBuffer;
+
+    private float halfHeight = height/2;
+    private float speed=0;
 
 
-    float[] lerpedBuffer;
+            
+    Star[] stars = new Star[800];
+    SecurityBeams[] sb = new SecurityBeams[800];
+
+
+    boolean[] on = new boolean[9];
+
+    AmpWave aw;
+    FreqWave fw;
+    Circle c;
 
 
     public void settings()
     {
-        size(800, 800);
+        size(1200, 800, P3D);
+        //size(1200, 800);
+        cx = width /2;
+        cy = height/2;
         
         // Use this to make fullscreen
         //fullScreen();
 
         // Use this to make fullscreen and use P3D for 3D graphics
         //fullScreen(P3D, SPAN); 
+
+        //Use P3D
        
     }
 
@@ -47,6 +66,18 @@ public class AlexVisual extends Visual{
         // Call this instead to read audio from the microphone
         //startListening();
         lerpedBuffer = new float[width]; 
+
+
+
+        for(int i=0; i<stars.length; i++){
+            stars[i] = new Star();
+        }
+        for(int i=0; i<stars.length; i++){
+            sb[i] = new SecurityBeams();
+        }
+        aw = new AmpWave(this);
+        fw = new FreqWave(this);
+        c = new Circle(this);
     }
 
     public void keyPressed()
@@ -67,8 +98,7 @@ public class AlexVisual extends Visual{
     public void draw()
     {
         background(0);
-        noStroke(); 
-        float halfHeight = height / 2;
+        noStroke();
         float average = 0;
         float sum = 0;
 
@@ -112,36 +142,48 @@ public class AlexVisual extends Visual{
                 //     line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
                 // }  
 
+                calculateAverageAmplitude();
                 calculateFrequencyBands();
 
-                //Amplitude //weird
-                for(int i = 0; i < getAudioBuffer().size(); i++){
-                    stroke(map(i, 0, getAudioBuffer().size(), 0, 255), 255, 255);
-                    //line(i, halfHeight - (getAudioBuffer().get(i)* halfHeight), i, halfHeight + (getAudioBuffer().get(i) * halfHeight));
-                    strokeWeight(1);
-                    //line(i, halfHeight - (getAudioBuffer().get(i)* halfHeight), i, halfHeight + (getAudioBuffer().get(i) * halfHeight));
-                    //line(i, halfHeight - (getAudioBuffer().get(i)* halfHeight), i, halfHeight + (getAudioBuffer().get(i) * halfHeight));
-                    line(i*2, halfHeight + (getAudioBuffer().get(i)* halfHeight), i*2, halfHeight + (getAudioBuffer().get(i) * halfHeight));
-                    //line(i * 10, halfHeight + (getAudioBuffer().get(i)* halfHeight), i * 10, halfHeight + (getAudioBuffer().get(i) * halfHeight));
-                }
+               
 
-                //Frequency
-                for(int i=0; i < getFFT().specSize(); i++){
-                    stroke(map(i, 0 , getAudioBuffer().size(), 0 ,255), 255, 255);
-                    strokeWeight(10);
-                    strokeCap(PROJECT);
-                    line(i* 10, height, i * 10, height - (getFFT().getBand(i)));
-                }
 
-                break; 
+                aw.update();
+                fw.update();
+                c.update();
+
+          
+               
+
+            
             }
-            //Weird vertex
-            case 1:
+            // //Weird vertex
+            // case 1:
+            // {
+            //     // fill(100, 0, 0);
+            //     // rect(0, 0, 200, 200);
+            //     for(int i=0;i< stars.length; i++){
+            //         stars[i].update();
+            //         stars[i].start();
+            //     }
+            //     break;
+            // }
+            case 2:
             {
-                fill(100, 0, 0);
-                rect(0, 0, 200, 200);
+                speed = map(mouseX, 0, width, 0, 20);
+                translate(width/2, height/2);
+
+
+                for(int i=0;i< stars.length; i++){
+                    sb[i].update();
+                    sb[i].start();
+                }
                 break;
             }
+
+
+
+
             //Weird vertex
             // case 2:
             // {
@@ -198,6 +240,54 @@ public class AlexVisual extends Visual{
             //     break;
             // }
         }   
+    }
+
+    public int getMode() {
+        return mode;
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
+    }
+
+    public int getCx() {
+        return cx;
+    }
+
+    public void setCx(int cx) {
+        this.cx = cx;
+    }
+
+    public int getCy() {
+        return cy;
+    }
+
+    public void setCy(int cy) {
+        this.cy = cy;
+    }
+
+    public float getLerpedAverage() {
+        return lerpedAverage;
+    }
+
+    public void setLerpedAverage(float lerpedAverage) {
+        this.lerpedAverage = lerpedAverage;
+    }
+
+    public float[] getLerpedBuffer() {
+        return lerpedBuffer;
+    }
+
+    public void setLerpedBuffer(float[] lerpedBuffer) {
+        this.lerpedBuffer = lerpedBuffer;
+    }
+
+    public float getHalfHeight() {
+        return halfHeight;
+    }
+
+    public void setHalfHeight(float halfHeight) {
+        this.halfHeight = halfHeight;
     }
 }
 
