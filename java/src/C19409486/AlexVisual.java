@@ -39,19 +39,16 @@ public class AlexVisual extends Visual{
 
     public void settings()
     {
-        size(800, 800, P3D);
-        //size(1200, 800);
+        //size(800, 800, P3D);
+        //size(1920 , 800);
         cx = width /2;
         cy = height/2;
         
         // Use this to make fullscreen
-        //fullScreen();
+        fullScreen(2);
 
         // Use this to make fullscreen and use P3D for 3D graphics
-        //fullScreen(P3D, SPAN); 
-
-        //Use P3D
-       
+        //fullScreen(P3D, 2); //span
     }
 
     public void setup()
@@ -66,8 +63,6 @@ public class AlexVisual extends Visual{
         // Call this instead to read audio from the microphone
         //startListening();
         lerpedBuffer = new float[width]; 
-
-
 
         for(int i=0; i<stars.length; i++){
             stars[i] = new Star();
@@ -140,9 +135,11 @@ public class AlexVisual extends Visual{
         if(on[2]){
             fw.update();
         } 
+
         if(on[3]){
             c.update();
         }
+
         if(on[4]){
             speed = map(mouseX, 0, width, 0, 20);
             translate(width/2, height/2);
