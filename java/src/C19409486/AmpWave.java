@@ -34,7 +34,14 @@ public class AmpWave {
 
             //line(i * 10, halfHeight + (getAudioBuffer().get(i)* halfHeight), i * 10, halfHeight + (getAudioBuffer().get(i) * halfHeight));
             //_av.line(i * 3, _av.getCy() + (_av.getAudioBuffer().get(i)* _av.getCy()), i * 3, _av.getCy() + (_av.getAudioBuffer().get(i) * _av.getCy()));
+
+            // _av.line(i, _av.getCy() + (_av.getAudioBuffer().get(i)* _av.getCy()), i, _av.getCy() + (_av.getAudioBuffer().get(i) * _av.getCy()));
+            _av.point(i, _av.getCy() + (_av.getAudioBuffer().get(i)* _av.getCy()));
+
+            float x;
+           // PApplet.map(i , 0,  _av.getAudioBuffer(),   0, width);  
             _av.line(i, _av.getCy() + (_av.getAudioBuffer().get(i)* _av.getCy()), i, _av.getCy() + (_av.getAudioBuffer().get(i) * _av.getCy()));
+            _av.line(i* 3, _av.getCy() + (_av.getAudioBuffer().get(i)* _av.getCy()), i* 3, _av.getCy() + (_av.getAudioBuffer().get(i) * _av.getCy()));
         }
 
     } 

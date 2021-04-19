@@ -39,7 +39,7 @@ public class AlexVisual extends Visual{
 
     public void settings()
     {
-        size(1200, 800, P3D);
+        size(800, 800, P3D);
         //size(1200, 800);
         cx = width /2;
         cy = height/2;
@@ -85,6 +85,8 @@ public class AlexVisual extends Visual{
       
         if (keyCode >= '0' && keyCode <= '9')
             mode = keyCode - '0';
+            on[mode] = !on[mode];
+
         if (keyCode == ' ') {
             if (getAudioPlayer().isPlaying()) {
                 getAudioPlayer().pause();
@@ -98,6 +100,8 @@ public class AlexVisual extends Visual{
     public void draw()
     {
         background(0);
+        // fill(0);
+        // rect(0,0,width,height);
         noStroke();
         float average = 0;
         float sum = 0;
@@ -127,120 +131,175 @@ public class AlexVisual extends Visual{
         // Move lerpedAverage 10% closer to average every frame
         lerpedAverage = lerp(lerpedAverage, average, 0.1f);
 
-        switch (mode)
-        {
-            //The Amplitude lines
-            case 0:
-            {
-                // Iterate over all the elements in the audio buffer
-                // for (int i = 0; i < getAudioBuffer().size(); i++) {
+       
+        //The Amplitude lines
+        if(on[1]){
+            aw.update();
+        }
+        //Weird vertex
+        if(on[2]){
+            fw.update();
+        } 
+        if(on[3]){
+            c.update();
+        }
+        if(on[4]){
+            speed = map(mouseX, 0, width, 0, 20);
+            translate(width/2, height/2);
 
-                //     float c = map(i, 0, getAudioBuffer().size(), 0, 255);
-                //     stroke(c, 255, 255);
-                //     lerpedBuffer[i] = lerp(lerpedBuffer[i], getAudioBuffer().get(i), 0.1f);
 
-                //     line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
-                // }  
+            for(int i=0;i< stars.length; i++){
+                sb[i].update();
+                sb[i].start();
+            }
+            
+        }
+    }
 
-                calculateAverageAmplitude();
-                calculateFrequencyBands();
+    // public void draw()
+    // {
+    //     //background(0);
+    //     fill(0);
+    //     rect(0,0,width,height);
+    //     noStroke();
+    //     float average = 0;
+    //     float sum = 0;
+
+    //     try
+    //     {
+    //         // Call this if you want to use FFT data
+    //         calculateFFT(); 
+    //     }
+    //     catch(VisualException e)
+    //     {
+    //         e.printStackTrace();
+    //     }
+    //     // Call this is you want to use frequency bands
+    //     calculateFrequencyBands(); 
+
+    //     // Call this is you want to get the average amplitude
+    //     calculateAverageAmplitude();
+        
+    //     // Calculate the average of the buffer
+    //     for (int i = 0; i < getAudioBuffer().size(); i ++)
+    //     {
+    //         sum += abs(getAudioBuffer().get(i));
+    //     }
+    //     average = sum / getAudioBuffer().size();
+
+    //     // Move lerpedAverage 10% closer to average every frame
+    //     lerpedAverage = lerp(lerpedAverage, average, 0.1f);
+
+    //     switch (mode)
+    //     {
+    //         //The Amplitude lines
+    //         case 0:
+    //         {
+    //             // Iterate over all the elements in the audio buffer
+    //             // for (int i = 0; i < getAudioBuffer().size(); i++) {
+
+    //             //     float c = map(i, 0, getAudioBuffer().size(), 0, 255);
+    //             //     stroke(c, 255, 255);
+    //             //     lerpedBuffer[i] = lerp(lerpedBuffer[i], getAudioBuffer().get(i), 0.1f);
+
+    //             //     line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
+    //             // }  
+
+    //             calculateAverageAmplitude();
+    //             calculateFrequencyBands();
 
                
 
 
-                aw.update();
-                fw.update();
-                c.update();
+    //             aw.update();
+    //             fw.update();
+    //             c.update();
 
           
                
 
             
-            }
-            // //Weird vertex
-            // case 1:
-            // {
-            //     // fill(100, 0, 0);
-            //     // rect(0, 0, 200, 200);
-            //     for(int i=0;i< stars.length; i++){
-            //         stars[i].update();
-            //         stars[i].start();
-            //     }
-            //     break;
-            // }
-            case 2:
-            {
-                speed = map(mouseX, 0, width, 0, 20);
-                translate(width/2, height/2);
+    //         }
+    //         //Weird vertex
+    //         case 1:
+    //         {
+    //             // fill(100, 0, 0);
+    //             // rect(0, 0, 200, 200);
+    //             // for(int i=0;i< stars.length; i++){
+    //             //     stars[i].update();
+    //             //     stars[i].start();
+    //             // }
+    //             // break;
+    //         }
+    //         case 2:
+    //         {
+    //             speed = map(mouseX, 0, width, 0, 20);
+    //             translate(width/2, height/2);
 
 
-                for(int i=0;i< stars.length; i++){
-                    sb[i].update();
-                    sb[i].start();
-                }
-                break;
-            }
+    //             for(int i=0;i< stars.length; i++){
+    //                 sb[i].update();
+    //                 sb[i].start();
+    //             }
+    //             break;
+    //         }
+    //         //Weird vertex
+    //         // case 3:
+    //         // {
+    //         //     background(0, 100, 100);
+    //         //     fill(50, 100, 100);
+    //         //     circle(cx, cy, 400);
+    //         //     fill(180, 100, 100);
+    //         //     triangle(400, 200, 200, 600, 600, 600);
+    //         //     fill(0, 0, 70);
+    //         //     ellipse(cx, cy, 200, 100);
+    //         //     fill(0, 0, 0);
+    //         //     circle(cx, cy, 50);
+    //         //     break;
+    //         // }
+    //         //Cube spawner
+    //         // case 3:
+    //         // {
+    //             // Cube cube= new Cube(Main.av, 0);
+    //             // cube.show();
+    //             // cube.update();
+    //             // break;
+    //         // }
+    //         //Shooting stars
+    //         // case 4:
+    //         // {
+    //         //     //background(0);
+    //         //     for (int i = 0; i < ab.size(); i++) {
 
+    //         //         float c = map(i, 0, ab.size(), 0, 255);
+    //         //         stroke(c, 255, 255);
+    //         //         lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
 
-
-
-            //Weird vertex
-            // case 2:
-            // {
-            //     background(0, 100, 100);
-            //     fill(50, 100, 100);
-            //     circle(cx, cy, 400);
-            //     fill(180, 100, 100);
-            //     triangle(400, 200, 200, 600, 600, 600);
-            //     fill(0, 0, 70);
-            //     ellipse(cx, cy, 200, 100);
-            //     fill(0, 0, 0);
-            //     circle(cx, cy, 50);
-            //     break;
-            // }
-            //Cube spawner
-            // case 3:
-            // {
-                // Cube cube= new Cube(Main.av, 0);
-                // cube.show();
-                // cube.update();
-                // break;
-            // }
-            //Shooting stars
-            // case 4:
-            // {
-            //     //background(0);
-            //     for (int i = 0; i < ab.size(); i++) {
-
-            //         float c = map(i, 0, ab.size(), 0, 255);
-            //         stroke(c, 255, 255);
-            //         lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
-
-            //         line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
+    //         //         line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
                   
-            //     }  
+    //         //     }  
               
-            //     speed = map(mouseX, 0, width, 0, 20);
-            //     translate(width/2, height/2);
-            //     for(int i=0;i< stars.length; i++){
-            //         stars[i].update();
-            //         stars[i].show();
-            //     }
-            //     break;
+    //         //     speed = map(mouseX, 0, width, 0, 20);
+    //         //     translate(width/2, height/2);
+    //         //     for(int i=0;i< stars.length; i++){
+    //         //         stars[i].update();
+    //         //         stars[i].show();
+    //         //     }
+    //         //     break;
                 
-            // }
-            // //Raindrops lets
-            // case 5: 
-            // {
-            //     //background(100, 0, 10);
-            //     for(int i=0; i<drops.length; i++){
-            //         drops[i].show();
-            //         drops[i].update();
-            //     }
-            //     break;
-            // }
-        }   
-    }
+    //         // }
+    //         // //Raindrops lets
+    //         // case 5: 
+    //         // {
+    //         //     //background(100, 0, 10);
+    //         //     for(int i=0; i<drops.length; i++){
+    //         //         drops[i].show();
+    //         //         drops[i].update();
+    //         //     }
+    //         //     break;
+    //         // }
+    //     }   
+    // }
 
     public int getMode() {
         return mode;

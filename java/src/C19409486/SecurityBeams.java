@@ -11,28 +11,32 @@ public class SecurityBeams {
     float px;
     float py;
 
-    AlexVisual av = Main.av;
+    AlexVisual _av = Main.av;
 
     SecurityBeams(){
-        x = av.random(-av.width, av.width);
-        y = av.random(-av.height, av.height);
-        z = av.random(av.width);
+        x = _av.random(-_av.width, _av.width);
+        y = _av.random(-_av.height, _av.height);
+        z = _av.random(_av.width);
     }
 
     void start(){
         // av.fill(120, 100, 55);
         // av.noStroke();
 
-        float sx = PApplet.map(x/z, 0, 1, 0, av.width);
-        float sy = PApplet.map(y/z, 0, 1, 0, av.height);
+        float sx = PApplet.map(x/z, 0, 1, 0, _av.width);
+        float sy = PApplet.map(y/z, 0, 1, 0, _av.height);
 
         // float r = PApplet.map(z, 0, av.width, 16, 0);
         // av.ellipse(sx, sy, r, r);
 
         //av.stroke(255);
-        av.stroke(120, 100, 55);
-        av.fill(120, 100, 55);
-        av.line(px, py, sx, sy);
+
+        _av.strokeWeight(2);
+        //_av.strokeCap(PApplet.PROJECT);
+
+        _av.stroke(120, 100, 55);
+        _av.fill(120, 100, 55);
+        _av.line(px, py, sx, sy);
 
         px = sx;
         py = sy;
@@ -41,9 +45,9 @@ public class SecurityBeams {
     void update(){
         z = z -10;
         if(z < 1){
-            z = av.width;
-            x = av.random(-av.width, av.width);
-            y = av.random(-av.height, av.height);
+            z = _av.width;
+            x = _av.random(-_av.width, _av.width);
+            y = _av.random(-_av.height, _av.height);
         }
     }
 
