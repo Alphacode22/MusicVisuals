@@ -2,7 +2,7 @@ package C19409486;
 
 import processing.core.PApplet;
 
-public class Circle {
+public class Circle implements MusicObject {
     AlexVisual _av;
     
     public Circle(AlexVisual av){
@@ -12,8 +12,12 @@ public class Circle {
     public void start(){
 
     }
-
+   
     public void update(){
+       drawCircle();
+    }
+
+    void drawCircle(){
         //Circle
         for (int i = 0; i < _av.getAudioBuffer().size(); i++) {
             //float c = PApplet.map(i, 0, _av.getAudioBuffer().size(), 0, 255);

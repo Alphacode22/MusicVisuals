@@ -3,7 +3,7 @@ package C19409486;
 import ie.tudublin.Main;
 import processing.core.PApplet;
 
-public class SecurityBeams {
+public class SecurityBeams implements MusicObject{
     float x;
     float y;
     float z;
@@ -11,15 +11,16 @@ public class SecurityBeams {
     float px;
     float py;
 
-    AlexVisual _av = Main.av;
+    AlexVisual _av;
 
-    SecurityBeams(){
+    public SecurityBeams(AlexVisual av){
+        this._av = av;
         x = _av.random(-_av.width, _av.width);
         y = _av.random(-_av.height, _av.height);
         z = _av.random(_av.width);
     }
 
-    void start(){
+    public void start(){
         // av.fill(120, 100, 55);
         // av.noStroke();
 
@@ -42,7 +43,11 @@ public class SecurityBeams {
         py = sy;
     }
 
-    void update(){
+    public void update(){
+        drawSecurityBeams();
+    }
+
+    void drawSecurityBeams(){
         z = z -10;
         if(z < 1){
             z = _av.width;

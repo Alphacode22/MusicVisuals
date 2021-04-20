@@ -12,12 +12,23 @@ Student Number: C19409486
 - Check out the WaveForm and AudioBandsVisual for examples of how to call the Processing functions from other classes that are not subclasses of PApplet
 
 # Description of the assignment
+This is an music visualiser which is used to display music in the form of unique entities.
 
 # Instructions
+Play the music and watch the shape transform. 
+Each entity connect on the keypad from 0 to 9. They are either in a on and off state.
+Turn each of the entities on and off
+There are a couple of entities I have designed to visualise the music
+Watch them interact with the music. 
+
 
 # How it works
+- The music is played 
+- Each note of the music is assigned a value by the minim library
+- The values are what is used to interact with the music
 
 # What I am most proud of in the assignment
+- Creating more complex shapes from easier shapes 
 
 # Markdown Tutorial
 

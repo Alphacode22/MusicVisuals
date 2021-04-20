@@ -2,8 +2,7 @@ package C19409486;
 
 import processing.core.PApplet;
 
-public class FreqWave {
-
+public class FreqWave implements MusicObject {
     AlexVisual _av;
     
     public FreqWave(AlexVisual av){
@@ -15,6 +14,10 @@ public class FreqWave {
     }
 
     public void update(){
+        drawFreqWave();
+    }
+
+    void drawFreqWave(){
           //Frequency
           for(int i=0; i < _av.getFFT().specSize(); i++){
             _av.stroke(PApplet.map(i, 0 , _av.getAudioBuffer().size(), 0 ,255), 255, 255);

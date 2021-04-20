@@ -1,5 +1,7 @@
 package C19409486;
 
+import java.util.ArrayList;
+
 import ddf.minim.AudioBuffer;
 import ddf.minim.AudioInput;
 import ddf.minim.AudioPlayer;
@@ -17,24 +19,29 @@ public class AlexVisual extends Visual{
     private int mode;
     private int cx, cy;
 
-
-    private float lerpedAverage = 0;
+    private float lerpedAverage;
     private float[] lerpedBuffer;
 
-    private float halfHeight = height/2;
-    private float speed=0;
+    private float halfHeight;
+    private float speed;
 
+    boolean[] on;
+  
+    //Star[] stars;
+    MusicObject[] sb;
+    
 
-            
-    Star[] stars = new Star[800];
-    SecurityBeams[] sb = new SecurityBeams[800];
+    MusicObject aw, fw, c, mc, cube, b;
+    // AmpWave aw;
+    // FreqWave fw;
+    // Circle c, mc;
+    // Cube cube;
+    // Box b;
 
+    private boolean isDestroying=false;
 
-    boolean[] on = new boolean[9];
-
-    AmpWave aw;
-    FreqWave fw;
-    Circle c;
+    ArrayList<MusicObject> mo = new ArrayList<MusicObject>();
+    private int frameTarget;
 
 
     public void settings()
@@ -45,6 +52,7 @@ public class AlexVisual extends Visual{
         cy = height/2;
         
         // Use this to make fullscreen
+        //fullScreen(2);
         fullScreen(2);
 
         // Use this to make fullscreen and use P3D for 3D graphics
@@ -62,26 +70,57 @@ public class AlexVisual extends Visual{
         
         // Call this instead to read audio from the microphone
         //startListening();
+
+        lerpedAverage=0;
+
+        halfHeight = height/2;
+        speed=0;
+
+        speed = map(mouseX, 0, width, 0, 20);
+        translate(width/2, height/2);
+
+        //stars = new Star[800];
+        sb = new SecurityBeams[800];
+        on = new boolean[10];
+
         lerpedBuffer = new float[width]; 
 
-        for(int i=0; i<stars.length; i++){
-            stars[i] = new Star();
-        }
-        for(int i=0; i<stars.length; i++){
-            sb[i] = new SecurityBeams();
-        }
         aw = new AmpWave(this);
         fw = new FreqWave(this);
         c = new Circle(this);
+        //mc = new MagicCircle(this);
+        //cube = new Cube(this, 90);
+        //b = new Box(this, 200, 200 ,0, halfHeight);
+        
+        reinstantiation();
+
+       
     }
 
+    //Instantiates mutiple objects
+    public void reinstantiation(){
+        //Stars
+        // for(int i=0; i<stars.length; i++){
+        //     stars[i] = new Star();
+        // }
+        //Security Beam
+        for(int i=0; i<sb.length; i++){
+            sb[i] = new SecurityBeams(this);
+        }
+        //Magic Circle
+        for(int i=0; i<10; i++){
+            mo.add(new MagicCircle(this));
+        }
+    }
+
+    //Key pressed
     public void keyPressed()
     {
-      
+        //Between 0 and 9 keys
         if (keyCode >= '0' && keyCode <= '9')
             mode = keyCode - '0';
             on[mode] = !on[mode];
-
+        //Space bar
         if (keyCode == ' ') {
             if (getAudioPlayer().isPlaying()) {
                 getAudioPlayer().pause();
@@ -94,26 +133,43 @@ public class AlexVisual extends Visual{
 
     public void draw()
     {
+        drawObjects();
+    }
+
+    public void timedDestroying(){
+        if(isDestroying){
+            for(int i=mo.size(); i > 0; i--){
+                mo.remove(i);
+            }
+        }else{
+            if(frameCount < frameTarget+30){
+                
+            } else {
+                isDestroying = false;
+            }
+        }
+    }
+
+    //Draw the objects
+    public void drawObjects(){
         background(0);
-        // fill(0);
-        // rect(0,0,width,height);
         noStroke();
         float average = 0;
         float sum = 0;
 
         try
         {
-            // Call this if you want to use FFT data
+            //Use FFT data
             calculateFFT(); 
         }
         catch(VisualException e)
         {
             e.printStackTrace();
         }
-        // Call this is you want to use frequency bands
+        // Get frequency bands
         calculateFrequencyBands(); 
 
-        // Call this is you want to get the average amplitude
+        // Get the average amplitude
         calculateAverageAmplitude();
         
         // Calculate the average of the buffer
@@ -126,30 +182,68 @@ public class AlexVisual extends Visual{
         // Move lerpedAverage 10% closer to average every frame
         lerpedAverage = lerp(lerpedAverage, average, 0.1f);
 
-       
+        //Display the modes
+        for(int i=0; i < on.length; i++){
+            fill(255);
+            textAlign(CENTER, CENTER);
+            textSize(20);
+            String temp;
+            temp = on[i] == true ? "on": "off";
+            text(i + " : " + temp, 20 + 20, (i * 30) + 20);
+        }
+
+    
+        // The centre circle
+        // c.update();
+
         //The Amplitude lines
         if(on[1]){
             aw.update();
         }
-        //Weird vertex
+        //The frequency lines
         if(on[2]){
             fw.update();
         } 
-
-        if(on[3]){
-            c.update();
-        }
-
-        if(on[4]){
-            speed = map(mouseX, 0, width, 0, 20);
-            translate(width/2, height/2);
-
-
-            for(int i=0;i< stars.length; i++){
+        //The security beams
+        if(on[3]){//Problem
+            for(int i=0;i< sb.length; i++){
                 sb[i].update();
                 sb[i].start();
             }
+        }
+        //Magic Circles Random appear and disappear
+        if(on[4]){//prob
+            for(int i=0; i < mo.size(); i++){
+                MusicObject temp= mo.get(i);
+                temp.update();
+            }
+        }
+        //Cubes
+        if(on[5]){//prob
+            //cube.start();
+            //cube.update();
+            //box.start();
+        }
+        //Cube Field
+        if(on[6]){
             
+        }
+        //Spiral 
+        if(on[7]){
+
+        }
+        //Sides //orbit
+        if(on[8]){
+
+        }
+        //Collusion 
+        if(on[9]){
+            isDestroying = true;
+            frameTarget= frameCount;
+        }
+        //Following
+        if(on[0]){
+            c.update();
         }
     }
 

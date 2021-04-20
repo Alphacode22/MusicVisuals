@@ -3,7 +3,7 @@ package C19409486;
 import ie.tudublin.Visual;
 import processing.core.PApplet;
 
-public class AmpWave {
+public class AmpWave implements MusicObject {
 
     AlexVisual _av;
 
@@ -14,7 +14,6 @@ public class AmpWave {
     public void start() {
    
     }
-
 
     public void update() {
         //Amplitude 
