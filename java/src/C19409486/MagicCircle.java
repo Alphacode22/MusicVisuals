@@ -16,13 +16,12 @@ public class MagicCircle extends Circle{
     @Override
     public void start() {
         // TODO Auto-generated method stub
-        super.start();
+     
     }
 
     @Override
     public void update() {
         // TODO Auto-generated method stub
-        super.update();
         magicCircle();
     }
    

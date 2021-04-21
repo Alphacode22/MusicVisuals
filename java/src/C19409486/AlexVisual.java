@@ -90,7 +90,7 @@ public class AlexVisual extends Visual{
         c = new Circle(this);
         //mc = new MagicCircle(this);
         //cube = new Cube(this, 90);
-        //b = new Box(this, 200, 200 ,0, halfHeight);
+        b = new Box(this, 200, 200 ,0, halfHeight);//Poor values
         
         reinstantiation();
 
@@ -224,6 +224,8 @@ public class AlexVisual extends Visual{
             //cube.start();
             //cube.update();
             //box.start();
+            b.update();
+           
         }
         //Cube Field
         if(on[6]){
