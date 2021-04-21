@@ -38,10 +38,10 @@ public class AlexVisual extends Visual{
     // Cube cube;
     // Box b;
 
-    private boolean isDestroying=false;
+    boolean isDestroying=false;
 
     ArrayList<MusicObject> mo = new ArrayList<MusicObject>();
-    private int frameTarget;
+    int frameTarget;
 
 
     public void settings()
@@ -117,11 +117,12 @@ public class AlexVisual extends Visual{
     public void keyPressed()
     {
         //Between 0 and 9 keys
-        if (keyCode >= '0' && keyCode <= '9')
+        if (keyCode >= '0' && keyCode <= '9'){
             mode = keyCode - '0';
             on[mode] = !on[mode];
+        }
         //Space bar
-        if (keyCode == ' ') {
+        else if (keyCode == ' ') {
             if (getAudioPlayer().isPlaying()) {
                 getAudioPlayer().pause();
             } else {
@@ -213,7 +214,7 @@ public class AlexVisual extends Visual{
         }
         //Magic Circles Random appear and disappear
         if(on[4]){//prob
-            for(int i=0; i < mo.size(); i++){
+            for(int i=0; i < mo.size()-1; i++){
                 MusicObject temp= mo.get(i);
                 temp.update();
             }
