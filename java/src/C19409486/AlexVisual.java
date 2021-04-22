@@ -46,6 +46,9 @@ public class AlexVisual extends Visual{
     boolean isDestroying=false;
 
     ArrayList<MusicObject> mo = new ArrayList<MusicObject>();
+
+    ArrayList<MusicObject> cubes = new ArrayList<MusicObject>();
+
     int frameTarget;
 
 
@@ -100,19 +103,24 @@ public class AlexVisual extends Visual{
         aw = new AmpWave(this);
         fw = new FreqWave(this);
         c = new Circle(this);
+
+
+
         mc = new MagicCircle(this);
-        cube = new Cube(this, 90);
-        b = new Box(this, 200, 200 ,0, halfHeight);//Poor values
-        s = new Star[200];
-        
-        
-        reinstantiation();
+
 
        
+      
+        //b = new Box(this, 200, 200 ,0, halfHeight);//Poor values
+        s = new Star[200];
+        reinstantiation();
     }
 
     //Instantiates mutiple objects
     public void reinstantiation(){
+        for(int i=0; i< 5; i++){
+            cubes.add(new Cube(this, 0, 50));
+        }
         //Stars
         for(int i=0; i<s.length; i++){
             s[i] = new Star(this);
@@ -240,12 +248,12 @@ public class AlexVisual extends Visual{
         }
         //Cubes
         if(on[5]){//prob
-            //cube.start();
+          
+            // cube.start();
+            for(int i=0; i<cubes.size(); i++){
+                cubes.get(i).update();
+            }
             //cube.update();
-            //box.start();
-           // b.update();
-            cube.start();
-            cube.update();
         }
         //Cube Field
         if(on[6]){
