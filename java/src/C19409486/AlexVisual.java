@@ -51,10 +51,10 @@ public class AlexVisual extends Visual{
 
     public void settings()
     {
+       
         //size(800, 800, P3D);
         //size(1920 , 800);
-        cx = width /2;
-        cy = height/2;
+     
         
         // Use this to make fullscreen
         //fullScreen(2);
@@ -62,11 +62,17 @@ public class AlexVisual extends Visual{
 
         // Use this to make fullscreen and use P3D for 3D graphics
         fullScreen(P3D, 2); //span
+    
+        
         //fullScreen(2); //span
     }
 
     public void setup()
     {
+        cx = width /2;
+        cy = height/2;
+        println("cx: " + cx);
+        println(cy);
         colorMode(HSB);
         startMinim();
                 
