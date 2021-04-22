@@ -75,9 +75,9 @@ public class TemporaryHolder2 extends Visual{
         for(int i=0; i<drops.length; i++){
             drops[i]= new Drop();
         }
-        for(int i=0; i<stars.length; i++){
-            stars[i] = new Star();
-        }
+        // for(int i=0; i<stars.length; i++){
+        //     stars[i] = new Star();
+        // }
     }
 
     public void keyPressed(){

@@ -3,7 +3,7 @@ package C19409486;
 import ie.tudublin.Main;
 import processing.core.PApplet;
 
-public class SecurityBeams implements MusicObject{
+public class SecurityBeams extends MusicObject{
     float x;
     float y;
     float z;
@@ -11,7 +11,7 @@ public class SecurityBeams implements MusicObject{
     float px;
     float py;
 
-    AlexVisual _av;
+  
 
     public SecurityBeams(AlexVisual av){
         this._av = av;

@@ -3,47 +3,47 @@ package C19409486;
 import ie.tudublin.Main;
 import processing.core.PApplet;
 
-public class Star {
+public class Star extends MusicObject{
     float x;
     float y;
     float z;
 
     float pz;
 
-    AlexVisual av = Main.av;
 
-    Star(){
-        x = av.random(-av.width, av.width);
-        y = av.random(-av.height, av.height);
-        z = av.random(av.width);
+    Star(AlexVisual av){
+        this._av = av;
+        x = _av.random(-_av.width, _av.width);
+        y = _av.random(-_av.height, _av.height);
+        z = _av.random(_av.width);
         pz = z;
     }
 
-    void start(){
-        av.fill(255);
-        av.noStroke();
+    public void start(){
+        _av.fill(255);
+        _av.noStroke();
 
-        float sx = PApplet.map(x/z, 0, 1, 0, av.width);
-        float sy = PApplet.map(y/z, 0, 1, 0, av.height);
+        float sx = PApplet.map(x/z, 0, 1, 0, _av.width);
+        float sy = PApplet.map(y/z, 0, 1, 0, _av.height);
 
-        float r = PApplet.map(z, 0, av.width, 16, 0);
-        av.ellipse(sx, sy, r, r);
+        float r = PApplet.map(z, 0, _av.width, 16, 0);
+        _av.ellipse(sx, sy, r, r);
 
-        float px = PApplet.map(x/pz, 0, 1, 0, av.height);
-        float py = PApplet.map(y/pz, 0, 1, 0, av.height);
+        float px = PApplet.map(x/pz, 0, 1, 0, _av.height);
+        float py = PApplet.map(y/pz, 0, 1, 0, _av.height);
 
-        av.stroke(255);
-        av.line(px, py, sx, sy);
+        _av.stroke(255);
+        _av.line(px, py, sx, sy);
 
       
     }
 
-    void update(){
+    public void update(){
         z = z -10;
         if(z < 1){
-            z = av.width;
-            x = av.random(-av.width, av.width);
-            y = av.random(-av.height, av.height);
+            z = _av.width;
+            x = _av.random(-_av.width, _av.width);
+            y = _av.random(-_av.height, _av.height);
             pz = z;
         }
     }

@@ -3,9 +3,9 @@ package C19409486;
 import ie.tudublin.Main;
 import processing.core.PApplet;
 
-public class Cube implements MusicObject {
+public class Cube extends MusicObject {
 
-    AlexVisual _av;
+  
     float _angle;
 
     public Cube(AlexVisual av, float angle) {
@@ -42,12 +42,21 @@ public class Cube implements MusicObject {
         _av.calculateAverageAmplitude();
         _av.stroke(PApplet.map( _av.getSmoothedAmplitude(), 0, 1, 0, 255), 255, 255);
         _av.strokeWeight(5);
-        _av.size(200, 200, _av.P3D);
-        _av.translate(0, 0, 0); 
-        _av.rotateY(0.5f);
+
+        _av.pushMatrix();
+        _av.camera(0, 0, 0, _av.height, _av.width, -1, 0, 1, 0);
+        //_av.size(200, 200, _av.P3D);
+        _av.translate(200, 200, 0); 
+        _av.rotateX(_angle);
+        _av.rotateZ(_angle);  
+        //_av.fill(PApplet.map( _av.getSmoothedAmplitude(), 0, 1, 0, 255), 255, 255);
+         float boxSize = 50 + (100 *  _av.getSmoothedAmplitude()); 
+        _av.box(boxSize);   
         _av.noFill();
         _av.lights();
-        _av.box(40);
+        //_av.box(40);
+        _av.popMatrix();
+        _angle += 0.01f;
     }
 }
 

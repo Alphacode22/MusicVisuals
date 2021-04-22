@@ -6,7 +6,7 @@ import ddf.minim.AudioBuffer;
 import processing.core.PApplet;
 
 public class MagicCircle extends Circle{
-    AlexVisual _av;
+
     
     public MagicCircle(AlexVisual av){
         super(av);//?
@@ -34,7 +34,7 @@ public class MagicCircle extends Circle{
         randInt = rng.nextInt(max - min + 1) + min;
         randInt2 = rng.nextInt(max - min + 1) + min;
         randInt3 = rng.nextInt(100 - 0 + 1) + 0;
-        i = rng.nextInt(_av.getAudioBuffer().size() - min + 1) + min;
+        i = rng.nextInt(_av.getAudioBuffer().size() - min ) + min;//-1
         _av.stroke((int)_av.getAudioBuffer().get(i) * 10, 100, 100);
         _av.strokeWeight(2); 
         _av.fill(0,0,0);

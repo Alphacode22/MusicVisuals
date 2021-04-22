@@ -2,7 +2,7 @@ package C19409486;
 
 import processing.core.PApplet;
 
-public class FreqWave implements MusicObject {
+public class FreqWave extends MusicObject {
     AlexVisual _av;
     
     public FreqWave(AlexVisual av){

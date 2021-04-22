@@ -2,9 +2,8 @@ package C19409486;
 
 import java.security.PublicKey;
 
-public class Box implements MusicObject{
+public class Box extends MusicObject{
 
-    private AlexVisual _av;
     private float _size;
     private float _w;
     private float _h;

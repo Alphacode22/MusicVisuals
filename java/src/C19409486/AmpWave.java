@@ -3,9 +3,9 @@ package C19409486;
 import ie.tudublin.Visual;
 import processing.core.PApplet;
 
-public class AmpWave implements MusicObject {
+public class AmpWave extends MusicObject {
 
-    AlexVisual _av;
+    
 
     public AmpWave(AlexVisual av){
         this._av = av;
@@ -20,21 +20,35 @@ public class AmpWave implements MusicObject {
         float prevX=0;
         float prevY=0;
         for(int i = 0; i < _av.getAudioBuffer().size(); i++){
+            float temp[] = new float[_av.getAudioBuffer().size()];
+
+            // lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
+            //setLerpedBuffer() = lerp(getLerpedBuffer().get(i),  _av.getAudioBuffer().get(i), 0.1f);
+
+            temp = generateLerp(_av.getAudioBuffer(), _av);
+
             _av.stroke(PApplet.map(i, 0, _av.getAudioBuffer().size(), 0, 255), 255, 255);
             _av.strokeWeight(1);
+            
+           // _av.noFill();
 
             // _av.point(i* 3, _av.getCy() + (_av.getAudioBuffer().get(i)* _av.getCy()));
             // _av.line(i * 3 , _av.getCy() + (_av.getAudioBuffer().get(i)* _av.getCy()), prevX, prevY);
 
 
+            // _av.point(i* 3, _av.height/2 + (_av.getAudioBuffer().get(i)* _av.height/2));
+            // _av.line(i * 3 , _av.getCy() + (_av.getAudioBuffer().get(i)* _av.getCy()), prevX, prevY);
 
-            _av.point(i* 3, _av.height/2 + (_av.getAudioBuffer().get(i)* _av.height/2));
-            _av.line(i * 3 , _av.getCy() + (_av.getAudioBuffer().get(i)* _av.getCy()), prevX, prevY);
+            // _av.point(i* 3, _av.height/2 + (temp[i]* _av.height/2));
+            // _av.line(i * 3 , _av.getCy() + (temp[i]* _av.getCy()), prevX, prevY);
 
             //float x;
            // PApplet.map(i , 0,  _av.getAudioBuffer(),   0, width);  
             //_av.line(i, _av.getCy() + (_av.getAudioBuffer().get(i)* _av.getCy()), i, _av.getCy() + (_av.getAudioBuffer().get(i) * _av.getCy()));
-            _av.line(i* 3,_av.height/2 + (_av.getAudioBuffer().get(i)* _av.height/2), i* 3, _av.height/2+ (_av.getAudioBuffer().get(i) *_av.height/2));
+
+          
+            _av.line(i* 3,_av.height/2 + (temp[i]* _av.height/2), i* 3, _av.height/2+ (temp[i] *_av.height/2));
+            //_av.line(i* 3,_av.height/2 + (_av.getAudioBuffer().get(i)* _av.height/2), i* 3, _av.height/2+ (_av.getAudioBuffer().get(i) *_av.height/2));
 
 
 

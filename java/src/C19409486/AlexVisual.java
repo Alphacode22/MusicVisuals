@@ -14,6 +14,8 @@ import ie.tudublin.Main;
 import ie.tudublin.Visual;
 import ie.tudublin.VisualException;
 
+
+ //yasc.bullets.remove(this);
 public class AlexVisual extends Visual{
 
     private int mode;
@@ -29,7 +31,10 @@ public class AlexVisual extends Visual{
   
     //Star[] stars;
     MusicObject[] sb;
+
+    MusicObject[] s;
     
+   
 
     MusicObject aw, fw, c, mc, cube, b;
     // AmpWave aw;
@@ -53,10 +58,10 @@ public class AlexVisual extends Visual{
         
         // Use this to make fullscreen
         //fullScreen(2);
-        fullScreen(2);
+        //fullScreen(2);
 
         // Use this to make fullscreen and use P3D for 3D graphics
-        //fullScreen(P3D, 2); //span
+        fullScreen(P3D, 2); //span
     }
 
     public void setup()
@@ -88,9 +93,11 @@ public class AlexVisual extends Visual{
         aw = new AmpWave(this);
         fw = new FreqWave(this);
         c = new Circle(this);
-        //mc = new MagicCircle(this);
-        //cube = new Cube(this, 90);
+        mc = new MagicCircle(this);
+        cube = new Cube(this, 90);
         b = new Box(this, 200, 200 ,0, halfHeight);//Poor values
+        s = new Star[200];
+        
         
         reinstantiation();
 
@@ -100,9 +107,9 @@ public class AlexVisual extends Visual{
     //Instantiates mutiple objects
     public void reinstantiation(){
         //Stars
-        // for(int i=0; i<stars.length; i++){
-        //     stars[i] = new Star();
-        // }
+        for(int i=0; i<s.length; i++){
+            s[i] = new Star(this);
+        }
         //Security Beam
         for(int i=0; i<sb.length; i++){
             sb[i] = new SecurityBeams(this);
@@ -195,15 +202,20 @@ public class AlexVisual extends Visual{
 
     
         // The centre circle
-        // c.update();
-
+        c.update();
+        aw.update();
+        fw.update();
+        //Following
+        if(on[0]){
+           // c.update();
+        }
         //The Amplitude lines
         if(on[1]){
-            aw.update();
+            //aw.update();
         }
         //The frequency lines
         if(on[2]){
-            fw.update();
+            //fw.update();
         } 
         //The security beams
         if(on[3]){//Problem
@@ -224,8 +236,9 @@ public class AlexVisual extends Visual{
             //cube.start();
             //cube.update();
             //box.start();
-            b.update();
-           
+           // b.update();
+            cube.start();
+            cube.update();
         }
         //Cube Field
         if(on[6]){
@@ -241,13 +254,14 @@ public class AlexVisual extends Visual{
         }
         //Collusion 
         if(on[9]){
-            isDestroying = true;
-            frameTarget= frameCount;
+            // isDestroying = true;
+            // frameTarget= frameCount;
+            for(int i=0;i< s.length; i++){
+                s[i].update();
+                s[i].start();
+            }
         }
-        //Following
-        if(on[0]){
-            c.update();
-        }
+        
     }
 
     // public void draw()
