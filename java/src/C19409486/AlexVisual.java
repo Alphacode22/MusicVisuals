@@ -62,6 +62,7 @@ public class AlexVisual extends Visual{
 
         // Use this to make fullscreen and use P3D for 3D graphics
         fullScreen(P3D, 2); //span
+        //fullScreen(2); //span
     }
 
     public void setup()
