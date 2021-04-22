@@ -44,7 +44,7 @@ public class Cube extends MusicObject {
         _av.strokeWeight(5);
 
         _av.pushMatrix();
-        _av.camera(0, 0, 0, _av.height, _av.width, -1, 0, 1, 0);
+        _av.camera(0, 0, 0, _av.getCx(), _av.getCy(), -1, 0, 1, 0);
         //_av.size(200, 200, _av.P3D);
         _av.translate(200, 200, 0); 
         _av.rotateX(_angle);
