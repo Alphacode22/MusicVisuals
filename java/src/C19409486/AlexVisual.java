@@ -30,13 +30,11 @@ public class AlexVisual extends Visual{
     boolean[] on;
   
     //Star[] stars;
-    MusicObject[] sb;
-
-    MusicObject[] s;
-    
-   
+  
 
     MusicObject aw, fw, c, mc, cube, b;
+
+    MusicObject[] sbArray, sArray, bbArray;
     // AmpWave aw;
     // FreqWave fw;
     // Circle c, mc;
@@ -45,10 +43,9 @@ public class AlexVisual extends Visual{
 
     boolean isDestroying=false;
 
-    ArrayList<MusicObject> mo = new ArrayList<MusicObject>();
+    ArrayList<MusicObject> moList, cubesList;
 
-    ArrayList<MusicObject> cubes = new ArrayList<MusicObject>();
-
+    
     int frameTarget;
 
 
@@ -94,8 +91,12 @@ public class AlexVisual extends Visual{
         speed = map(mouseX, 0, width, 0, 20);
         translate(width/2, height/2);
 
+        moList = new ArrayList<MusicObject>();
+
+        cubesList = new ArrayList<MusicObject>();
+
         //stars = new Star[800];
-        sb = new SecurityBeams[800];
+        sbArray = new SecurityBeams[800];
         on = new boolean[10];
 
         lerpedBuffer = new float[width]; 
@@ -108,31 +109,36 @@ public class AlexVisual extends Visual{
 
         mc = new MagicCircle(this);
 
+        bbArray = new BouncingCircle[5];
 
-       
-      
         //b = new Box(this, 200, 200 ,0, halfHeight);//Poor values
-        s = new Star[200];
+        sArray = new Star[200];
         reinstantiation();
     }
 
     //Instantiates mutiple objects
     public void reinstantiation(){
         for(int i=0; i< 5; i++){
-            cubes.add(new Cube(this, 0, 50));
+            cubesList.add(new Cube(this, 0, 50));
         }
         //Stars
-        for(int i=0; i<s.length; i++){
-            s[i] = new Star(this);
+        for(int i=0; i<sArray.length; i++){
+            sArray[i] = new Star(this);
         }
         //Security Beam
-        for(int i=0; i<sb.length; i++){
-            sb[i] = new SecurityBeams(this);
+        for(int i=0; i<sbArray.length; i++){
+            sbArray[i] = new SecurityBeams(this);
         }
         //Magic Circle
         for(int i=0; i<10; i++){
-            mo.add(new MagicCircle(this));
+            moList.add(new MagicCircle(this));
         }
+        //bouncing Circle
+        for(int i=0; i<bbArray.length; i++){
+            bbArray[i] = new BouncingCircle(this);
+        }
+        
+
     }
 
     //Key pressed
@@ -161,8 +167,8 @@ public class AlexVisual extends Visual{
 
     public void timedDestroying(){
         if(isDestroying){
-            for(int i=mo.size(); i > 0; i--){
-                mo.remove(i);
+            for(int i=moList.size(); i > 0; i--){
+                moList.remove(i);
             }
         }else{
             if(frameCount < frameTarget+30){
@@ -229,26 +235,28 @@ public class AlexVisual extends Visual{
         } 
         //The security beams
         if(on[3]){//Problem
-            for(int i=0;i< sb.length; i++){
-                sb[i].update();
-                sb[i].start();
+            for(int i=0;i< sbArray.length; i++){
+                sbArray[i].update();
+                sbArray[i].start();
             }
         }
         //Magic Circles Random appear and disappear?
         if(on[4]){//prob
-            for(int i=0; i < mo.size()-1; i++){
-                MusicObject temp= mo.get(i);
+            for(int i=0; i < moList.size()-1; i++){
+                MusicObject temp= moList.get(i);
                 temp.update();
             }
         }
         //Circle Bouncing
         if(on[5]){//prob
-            
+            for(int i=0; i < bbArray.length; i++){
+                bbArray[i].update();
+            }
         }
         //Cube Field
         if(on[6]){
-            for(int i=0; i<cubes.size(); i++){
-            cubes.get(i).update();
+            for(int i=0; i<cubesList.size(); i++){
+            cubesList.get(i).update();
             }
         }
         //Cube orbit
@@ -259,9 +267,9 @@ public class AlexVisual extends Visual{
         if(on[8]){
             // isDestroying = true;
             // frameTarget= frameCount;
-            for(int i=0;i< s.length; i++){
-                s[i].update();
-                s[i].start();
+            for(int i=0;i< sArray.length; i++){
+                sArray[i].update();
+                sArray[i].start();
             }
         }
         if(on[9]){

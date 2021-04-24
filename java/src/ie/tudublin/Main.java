@@ -1,6 +1,7 @@
 package ie.tudublin;
 
 import C19409486.AlexVisual;
+import C19409486.Test;
 import example.CubeVisual;
 import example.CubeVisual1;
 import example.MyVisual;
@@ -30,6 +31,12 @@ public class Main
 		String[] a = {"MAIN"};
         processing.core.PApplet.runSketch( a, new MyVisual());	
 	}
+
+	public void test() {
+		String[] a = {"MAIN"};
+        processing.core.PApplet.runSketch( a, new Test());	
+	}
+
 
 	public static void main(String[] args)
 	{

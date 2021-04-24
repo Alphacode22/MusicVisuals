@@ -5,6 +5,10 @@ import ddf.minim.AudioBuffer;
 public class MusicObject implements UnityLike{
 
     AlexVisual _av;
+    float _x;
+    float _y;
+    float _z;
+
     // //This is the function that will start and display the object first
     public void start(){
 

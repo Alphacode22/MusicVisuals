@@ -32,9 +32,9 @@ public class Circle extends MusicObject {
         //float c = PApplet.map(i, 0, _av.getAudioBuffer().size(), 0, 255);
         //_av.stroke(207, 80, 58);
         //_av.stroke(c , 255, 255);
-        _av.stroke(255, 255, 255);
+        _av.stroke(255,255,255);
         _av.strokeWeight(2); 
         _av.fill(0,0,0);
-        _av.ellipse(_av.width/2, _av.height/2, 200 + (_av.getLerpedAverage() * 500), 200 + (_av.getLerpedAverage() * 500));//50
+        _av.circle(_av.width/2, _av.height/2, 200 + (_av.getLerpedAverage() * 500));//50
     }
 }
