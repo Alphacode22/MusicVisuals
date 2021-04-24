@@ -215,22 +215,17 @@ public class AlexVisual extends Visual{
             text(i + " : " + temp, 20 + 20, (i * 30) + 20);
         }
 
-    
-        // The centre circle
-        c.update();
-        aw.update();
-        fw.update();
-        //Following
+        //Center circle
         if(on[0]){
-           // c.update();
+           c.update();
         }
         //The Amplitude lines
         if(on[1]){
-            //aw.update();
+            aw.update();
         }
         //The frequency lines
         if(on[2]){
-            //fw.update();
+            fw.update();
         } 
         //The security beams
         if(on[3]){//Problem
@@ -239,36 +234,29 @@ public class AlexVisual extends Visual{
                 sb[i].start();
             }
         }
-        //Magic Circles Random appear and disappear
+        //Magic Circles Random appear and disappear?
         if(on[4]){//prob
             for(int i=0; i < mo.size()-1; i++){
                 MusicObject temp= mo.get(i);
                 temp.update();
             }
         }
-        //Cubes
+        //Circle Bouncing
         if(on[5]){//prob
-          
-            // cube.start();
-            for(int i=0; i<cubes.size(); i++){
-                cubes.get(i).update();
-            }
-            //cube.update();
+            
         }
         //Cube Field
         if(on[6]){
-            
+            for(int i=0; i<cubes.size(); i++){
+            cubes.get(i).update();
+            }
         }
-        //Spiral 
+        //Cube orbit
         if(on[7]){
-
+            //
         }
-        //Sides //orbit
+        //Collusion Circles
         if(on[8]){
-
-        }
-        //Collusion 
-        if(on[9]){
             // isDestroying = true;
             // frameTarget= frameCount;
             for(int i=0;i< s.length; i++){
@@ -276,7 +264,9 @@ public class AlexVisual extends Visual{
                 s[i].start();
             }
         }
-        
+        if(on[9]){
+            
+        }
     }
 
     // public void draw()

@@ -15,6 +15,11 @@ public class AmpWave extends MusicObject {
     }
 
     public void update() {
+       drawAmp();
+    } 
+
+    // drawp amplitude wave
+    public void drawAmp(){
         //Amplitude 
         float prevX=0;
         float prevY=0;
@@ -22,7 +27,7 @@ public class AmpWave extends MusicObject {
             float temp[] = new float[_av.getAudioBuffer().size()];
 
             _av.stroke(PApplet.map(i, 0, _av.getAudioBuffer().size(), 0, 255), 255, 255);
-          
+        
             temp = generateLerp(_av.getAudioBuffer(), _av);
 
             _av.strokeWeight(1);
@@ -32,5 +37,5 @@ public class AmpWave extends MusicObject {
             _av.strokeWeight(2);
             _av.line(i* 3,_av.height/2 + (temp[i]* _av.height/2), 0, i* 3, _av.height/2+ (temp[i+1] *_av.height/2), 0);
         }
-    } 
+    }
 }

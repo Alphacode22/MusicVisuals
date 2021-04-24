@@ -22,10 +22,10 @@ public class MagicCircle extends Circle{
     @Override
     public void update() {
         // TODO Auto-generated method stub
-        magicCircle();
+        drawMagicCircle();
     }
    
-    public void magicCircle(){
+    public void drawMagicCircle(){
         Random rng = new Random();
         int min =0;
         int max = _av.height;
