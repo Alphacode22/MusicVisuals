@@ -17,12 +17,14 @@ interact with the music while it is playing.
 
 # Instructions
 Fork the Project and clone into your local computer
-Play the music and watch the shape transform. 
-Each entity connect on the keypad from 0 to 9. They are either in a on and off state.
+Press F5 to run the program
+Play the music and watch the shape transform
+Press the spacebar to start the music or stop it
+Each entity connect on the keypad from 0 to 7. They are either in a on and off state.
 Turn each of the entities on and off
 There are a couple of entities I have designed to visualise the music
-Watch them interact with the music. 
-Sit back and relax.
+Watch them interact with the music
+Sit back and relax
 
 # How it works
 - The music is played 
@@ -31,9 +33,16 @@ Sit back and relax.
 - Each entity is drawn on the screen every frame
 
 # What I am most proud of in the assignment
-- Creating more complex shapes from easier shapes 
+- Creating more complex shapes from easier shapes. I managed to create a more complex looking amplitude wave from the sin wave
+
+
+
+
+
 
 # Markdown Tutorial
+
+
 
 # References(Added Here)
 - Waves

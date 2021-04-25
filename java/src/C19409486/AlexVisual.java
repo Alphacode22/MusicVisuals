@@ -32,7 +32,7 @@ public class AlexVisual extends Visual{
     //Star[] stars;
   
 
-    MusicObject aw, fw, c, mc, cube, b;
+    MusicObject aw, fw, c, mc, cube, b, o, sides;
 
     MusicObject[] sbArray, sArray, bbArray;
     // AmpWave aw;
@@ -64,7 +64,7 @@ public class AlexVisual extends Visual{
         fullScreen(P3D, 2); //span
     
         
-        //fullScreen(2); //span
+       // fullScreen(2); //span
     }
 
     public void setup()
@@ -105,9 +105,14 @@ public class AlexVisual extends Visual{
         fw = new FreqWave(this);
         c = new Circle(this);
 
+        o = new Orbit(this, 50, 0, 1);
+      
+
 
 
         mc = new MagicCircle(this);
+
+        sides = new Sides(this);
 
         bbArray = new BouncingCircle[5];
 
@@ -180,6 +185,7 @@ public class AlexVisual extends Visual{
     }
 
     //Draw the objects
+    boolean haveOne = false;
     public void drawObjects(){
         background(0);
         noStroke();
@@ -259,22 +265,33 @@ public class AlexVisual extends Visual{
             cubesList.get(i).update();
             }
         }
-        //Cube orbit
-        if(on[7]){
-            //
-        }
-        //Collusion Circles
-        if(on[8]){
-            // isDestroying = true;
-            // frameTarget= frameCount;
-            for(int i=0;i< sArray.length; i++){
-                sArray[i].update();
-                sArray[i].start();
-            }
-        }
-        if(on[9]){
+        // //Collison Circles
+        // if(on[7]){
+           
+        // }
+        // //Sides
+        // if(on[8]){
+        //     // // isDestroying = true;
+        //     // // frameTarget= frameCount;
+        //     // for(int i=0;i< sArray.length; i++){
+        //     //     sArray[i].update();
+        //     //     sArray[i].start();
+        //     // }
+        //     sides.update();
+
             
-        }
+        // }
+        // //Orbit
+        // if(on[9]){
+        //      //
+        //      if(!haveOne){
+        //         o.start();
+        //         o.update();
+        //         haveOne = true;
+        //     }else {
+        //         o.start();
+        //     }
+        // }
     }
 
     // public void draw()

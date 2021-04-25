@@ -4,9 +4,9 @@ import java.util.Random;
 
 public class BouncingCircle extends Circle{
 
-    private float gravity=40;
+    private float gravity=20;
 
-    float ySpeed=0;
+    private float ySpeed=-1;
 
 
     public BouncingCircle(AlexVisual av) {
@@ -31,41 +31,45 @@ public class BouncingCircle extends Circle{
 
     void drawBouncingCircles(){
 
-        if(gravity <= 2){
-            gravity = 20;
-        }
+        // if(gravity <= 2){
+        //     gravity = 20;
+        // }
        
-        _y *= ySpeed;
+        _y += ySpeed; 
+
+        if(_y > _av.height || _y <0){
+            //ySpeed = -randomiser(1, 10);
+            ySpeed *=  -1;
+        }else{
+            ySpeed += gravity;
+        }
+
+        // Save previous values
+        float oldX = _x;
+        float oldy = _y;
+        // vxold = vx;
+        // vyold = vy;
+
+     
 
         _av.stroke(100, 255, 255);
         _av.strokeWeight(2); 
         _av.fill(0,0,0);
         _av.circle(_x , _y , 50);
 
-        
-
-
-       
-
-        if(_y >= _av.height){
-            ySpeed -= gravity;
-            // Random rng= new Random();
-            // int heightMax=10;
-            // int min=10;
-            // int i = rng.nextInt(heightMax - min + 1) + min;
-            // for(int i =0; i < _av.getAudioBuffer().size(); i ++){
-            //     gravity *= 20* _av.getAudioBuffer().get(i);
-            // }
+    
+        // if(_y >= _av.height){
+        //     ySpeed -= gravity;
          
-        }else {
-            ySpeed += 10 ;
-        }
+        // }else {
+        //     ySpeed += 10 ;
+        // }
     }
 
 
 
 
-    
+
     int randomiser(int min, int max){
         Random rng = new Random();
         // int min =0;

@@ -2,7 +2,7 @@ package C19409486;
 
 import ddf.minim.AudioBuffer;
 
-public class MusicObject implements UnityLike{
+public abstract class MusicObject implements UnityLike{
 
     AlexVisual _av;
     float _x;
@@ -32,6 +32,7 @@ public class MusicObject implements UnityLike{
         //setLerpedBuffer() = lerp(getLerpedBuffer().get(i),  _av.getAudioBuffer().get(i), 0.1f);
         return outBuffer;
     }
+   
 
 }
 

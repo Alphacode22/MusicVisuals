@@ -17,7 +17,8 @@ public class SecurityBeams extends MusicObject{
         this._av = av;
         x = _av.random(-_av.width, _av.width);
         y = _av.random(-_av.height, _av.height);
-        z = _av.random(_av.width);
+        //z = _av.random(_av.width);
+        z = -10;
     }
 
     public void start(){

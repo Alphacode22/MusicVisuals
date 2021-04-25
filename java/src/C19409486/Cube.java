@@ -42,11 +42,12 @@ public class Cube extends MusicObject {
         _av.translate(randInt, randInt2, 50); 
         _av.rotateX(_angle);
         _av.rotateZ(_angle);  
+        _av.noFill();
 
         float boxSize = 50 + (100 *  _av.getSmoothedAmplitude()); 
         _av.box(boxSize);   
         
-        _av.noFill();
+       
         _av.lights();
  
         _av.popMatrix();
