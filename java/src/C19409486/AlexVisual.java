@@ -13,11 +13,7 @@ import example.WaveForm;
 import ie.tudublin.Main;
 import ie.tudublin.Visual;
 import ie.tudublin.VisualException;
-// import peasy.PeasyCam;
-// import peasycam.reference.peasy.*;
 
-
- //yasc.bullets.remove(this);
 public class AlexVisual extends Visual{
 
     private int mode;

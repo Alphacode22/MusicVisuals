@@ -47,4 +47,4 @@ public class Star extends MusicObject{
             pz = z;
         }
     }
-}//8.01
+}
