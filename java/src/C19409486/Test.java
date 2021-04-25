@@ -24,7 +24,7 @@ public class Test extends PApplet{
     }
 
     public void draw() {
-        background(255);
+    background(255);
     noStroke();
     fill(255,10);
     rect(0,0,width,height);

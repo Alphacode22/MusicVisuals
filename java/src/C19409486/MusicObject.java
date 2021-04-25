@@ -1,8 +1,10 @@
 package C19409486;
 
+import java.util.Random;
+
 import ddf.minim.AudioBuffer;
 
-public abstract class MusicObject implements UnityLike{
+public abstract class MusicObject implements IUnityLike{
 
     AlexVisual _av;
     float _x;
@@ -25,12 +27,16 @@ public abstract class MusicObject implements UnityLike{
         for(int i=0; i<inBuffer.size(); i++){
             outBuffer[i] = av.lerp(outBuffer[i], inBuffer.get(i), 0.8f);
         }
-        // lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
 
-
-
-        //setLerpedBuffer() = lerp(getLerpedBuffer().get(i),  _av.getAudioBuffer().get(i), 0.1f);
         return outBuffer;
+    }
+
+    int randomiser(int min, int max){
+        int randInt =0;
+        Random rng = new Random();
+
+        randInt = rng.nextInt(max - min + 1) + min;
+        return randInt;
     }
    
 

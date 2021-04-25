@@ -21,8 +21,6 @@ public class AmpWave extends MusicObject {
     // drawp amplitude wave
     public void drawAmp(){
         //Amplitude 
-        float prevX=0;
-        float prevY=0;
         for(int i = 0; i < _av.getAudioBuffer().size()-1; i++){
             float temp[] = new float[_av.getAudioBuffer().size()];
 

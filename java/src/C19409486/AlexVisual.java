@@ -13,6 +13,8 @@ import example.WaveForm;
 import ie.tudublin.Main;
 import ie.tudublin.Visual;
 import ie.tudublin.VisualException;
+// import peasy.PeasyCam;
+// import peasycam.reference.peasy.*;
 
 
  //yasc.bullets.remove(this);
@@ -29,18 +31,13 @@ public class AlexVisual extends Visual{
 
     boolean[] on;
   
-    //Star[] stars;
-  
 
-    MusicObject aw, fw, c, mc, cube, b, o, sides;
+    MusicObject aw, fw, c, mc, cube, b;
 
     MusicObject[] sbArray, sArray, bbArray;
-    // AmpWave aw;
-    // FreqWave fw;
-    // Circle c, mc;
-    // Cube cube;
-    // Box b;
 
+    Orbit o;
+   
     boolean isDestroying=false;
 
     ArrayList<MusicObject> moList, cubesList;
@@ -48,23 +45,20 @@ public class AlexVisual extends Visual{
     
     int frameTarget;
 
+    //PeasyCam cam;
+
 
     public void settings()
     {
-       
+        //Other sizes
         //size(800, 800, P3D);
         //size(1920 , 800);
      
-        
         // Use this to make fullscreen
-        //fullScreen(2);
         //fullScreen(2);
 
         // Use this to make fullscreen and use P3D for 3D graphics
-        fullScreen(P3D, 2); //span
-    
-        
-       // fullScreen(2); //span
+        fullScreen(P3D, 2); 
     }
 
     public void setup()
@@ -97,7 +91,7 @@ public class AlexVisual extends Visual{
 
         //stars = new Star[800];
         sbArray = new SecurityBeams[800];
-        on = new boolean[10];
+        on = new boolean[9];
 
         lerpedBuffer = new float[width]; 
 
@@ -106,17 +100,19 @@ public class AlexVisual extends Visual{
         c = new Circle(this);
 
         o = new Orbit(this, 50, 0, 1);
+        translate(cx, cy, -10);
+        o.spawnSmallerOrbits(2, 1);
       
-
-
+        lights();
+        o.start();
+       
 
         mc = new MagicCircle(this);
 
-        sides = new Sides(this);
+        //sides = new Sides(this);
 
         bbArray = new BouncingCircle[5];
 
-        //b = new Box(this, 200, 200 ,0, halfHeight);//Poor values
         sArray = new Star[200];
         reinstantiation();
     }
@@ -124,7 +120,7 @@ public class AlexVisual extends Visual{
     //Instantiates mutiple objects
     public void reinstantiation(){
         for(int i=0; i< 5; i++){
-            cubesList.add(new Cube(this, 0, 50));
+            cubesList.add(new Cube(this, 0));
         }
         //Stars
         for(int i=0; i<sArray.length; i++){
@@ -142,15 +138,13 @@ public class AlexVisual extends Visual{
         for(int i=0; i<bbArray.length; i++){
             bbArray[i] = new BouncingCircle(this);
         }
-        
-
     }
 
     //Key pressed
     public void keyPressed()
     {
         //Between 0 and 9 keys
-        if (keyCode >= '0' && keyCode <= '9'){
+        if (keyCode >= '0' && keyCode <= '7'){
             mode = keyCode - '0';
             on[mode] = !on[mode];
         }
@@ -168,20 +162,6 @@ public class AlexVisual extends Visual{
     public void draw()
     {
         drawObjects();
-    }
-
-    public void timedDestroying(){
-        if(isDestroying){
-            for(int i=moList.size(); i > 0; i--){
-                moList.remove(i);
-            }
-        }else{
-            if(frameCount < frameTarget+30){
-                
-            } else {
-                isDestroying = false;
-            }
-        }
     }
 
     //Draw the objects
@@ -262,182 +242,14 @@ public class AlexVisual extends Visual{
         //Cube Field
         if(on[6]){
             for(int i=0; i<cubesList.size(); i++){
-            cubesList.get(i).update();
+                cubesList.get(i).update();
             }
         }
-        // //Collison Circles
-        // if(on[7]){
-           
-        // }
-        // //Sides
-        // if(on[8]){
-        //     // // isDestroying = true;
-        //     // // frameTarget= frameCount;
-        //     // for(int i=0;i< sArray.length; i++){
-        //     //     sArray[i].update();
-        //     //     sArray[i].start();
-        //     // }
-        //     sides.update();
-
-            
-        // }
-        // //Orbit
-        // if(on[9]){
-        //      //
-        //      if(!haveOne){
-        //         o.start();
-        //         o.update();
-        //         haveOne = true;
-        //     }else {
-        //         o.start();
-        //     }
-        // }
-    }
-
-    // public void draw()
-    // {
-    //     //background(0);
-    //     fill(0);
-    //     rect(0,0,width,height);
-    //     noStroke();
-    //     float average = 0;
-    //     float sum = 0;
-
-    //     try
-    //     {
-    //         // Call this if you want to use FFT data
-    //         calculateFFT(); 
-    //     }
-    //     catch(VisualException e)
-    //     {
-    //         e.printStackTrace();
-    //     }
-    //     // Call this is you want to use frequency bands
-    //     calculateFrequencyBands(); 
-
-    //     // Call this is you want to get the average amplitude
-    //     calculateAverageAmplitude();
+        if(on[7]){
         
-    //     // Calculate the average of the buffer
-    //     for (int i = 0; i < getAudioBuffer().size(); i ++)
-    //     {
-    //         sum += abs(getAudioBuffer().get(i));
-    //     }
-    //     average = sum / getAudioBuffer().size();
-
-    //     // Move lerpedAverage 10% closer to average every frame
-    //     lerpedAverage = lerp(lerpedAverage, average, 0.1f);
-
-    //     switch (mode)
-    //     {
-    //         //The Amplitude lines
-    //         case 0:
-    //         {
-    //             // Iterate over all the elements in the audio buffer
-    //             // for (int i = 0; i < getAudioBuffer().size(); i++) {
-
-    //             //     float c = map(i, 0, getAudioBuffer().size(), 0, 255);
-    //             //     stroke(c, 255, 255);
-    //             //     lerpedBuffer[i] = lerp(lerpedBuffer[i], getAudioBuffer().get(i), 0.1f);
-
-    //             //     line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
-    //             // }  
-
-    //             calculateAverageAmplitude();
-    //             calculateFrequencyBands();
-
-               
-
-
-    //             aw.update();
-    //             fw.update();
-    //             c.update();
-
-          
-               
-
-            
-    //         }
-    //         //Weird vertex
-    //         case 1:
-    //         {
-    //             // fill(100, 0, 0);
-    //             // rect(0, 0, 200, 200);
-    //             // for(int i=0;i< stars.length; i++){
-    //             //     stars[i].update();
-    //             //     stars[i].start();
-    //             // }
-    //             // break;
-    //         }
-    //         case 2:
-    //         {
-    //             speed = map(mouseX, 0, width, 0, 20);
-    //             translate(width/2, height/2);
-
-
-    //             for(int i=0;i< stars.length; i++){
-    //                 sb[i].update();
-    //                 sb[i].start();
-    //             }
-    //             break;
-    //         }
-    //         //Weird vertex
-    //         // case 3:
-    //         // {
-    //         //     background(0, 100, 100);
-    //         //     fill(50, 100, 100);
-    //         //     circle(cx, cy, 400);
-    //         //     fill(180, 100, 100);
-    //         //     triangle(400, 200, 200, 600, 600, 600);
-    //         //     fill(0, 0, 70);
-    //         //     ellipse(cx, cy, 200, 100);
-    //         //     fill(0, 0, 0);
-    //         //     circle(cx, cy, 50);
-    //         //     break;
-    //         // }
-    //         //Cube spawner
-    //         // case 3:
-    //         // {
-    //             // Cube cube= new Cube(Main.av, 0);
-    //             // cube.show();
-    //             // cube.update();
-    //             // break;
-    //         // }
-    //         //Shooting stars
-    //         // case 4:
-    //         // {
-    //         //     //background(0);
-    //         //     for (int i = 0; i < ab.size(); i++) {
-
-    //         //         float c = map(i, 0, ab.size(), 0, 255);
-    //         //         stroke(c, 255, 255);
-    //         //         lerpedBuffer[i] = lerp(lerpedBuffer[i], ab.get(i), 0.1f);
-
-    //         //         line(i, halfHeight - lerpedBuffer[i] * halfHeight * 4, i, halfHeight + lerpedBuffer[i] * halfHeight * 4);
-                  
-    //         //     }  
-              
-    //         //     speed = map(mouseX, 0, width, 0, 20);
-    //         //     translate(width/2, height/2);
-    //         //     for(int i=0;i< stars.length; i++){
-    //         //         stars[i].update();
-    //         //         stars[i].show();
-    //         //     }
-    //         //     break;
-                
-    //         // }
-    //         // //Raindrops lets
-    //         // case 5: 
-    //         // {
-    //         //     //background(100, 0, 10);
-    //         //     for(int i=0; i<drops.length; i++){
-    //         //         drops[i].show();
-    //         //         drops[i].update();
-    //         //     }
-    //         //     break;
-    //         // }
-    //     }   
-    // }
+         
+        }
+    }
 
     public int getMode() {
         return mode;
