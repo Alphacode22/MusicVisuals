@@ -13,6 +13,8 @@ import example.WaveForm;
 import ie.tudublin.Main;
 import ie.tudublin.Visual;
 import ie.tudublin.VisualException;
+import peasy.PeasyCam;
+import processing.core.PApplet;
 
 public class AlexVisual extends Visual{
 
@@ -29,6 +31,7 @@ public class AlexVisual extends Visual{
   
 
     MusicObject aw, fw, c, mc, cube, b;
+    MusicObject sphere;
 
     MusicObject[] sbArray, sArray, bbArray;
 
@@ -40,8 +43,9 @@ public class AlexVisual extends Visual{
 
     
     int frameTarget;
+    //private PApplet orbits;
 
-    //PeasyCam cam;
+    PeasyCam cam;
 
 
     public void settings()
@@ -95,12 +99,9 @@ public class AlexVisual extends Visual{
         fw = new FreqWave(this);
         c = new Circle(this);
 
-        o = new Orbit(this, 50, 0, 1);
-        translate(cx, cy, -10);
-        o.spawnSmallerOrbits(2, 1);
-      
-        lights();
-        o.start();
+     
+        //lights();
+        //o.start();
        
 
         mc = new MagicCircle(this);
@@ -110,7 +111,24 @@ public class AlexVisual extends Visual{
         bbArray = new BouncingCircle[5];
 
         sArray = new Star[200];
+
+       // cam = new PeasyCam(this, 0);
+       
+        
+    
         reinstantiation();
+
+        sphere = new Sphere(this);
+        sphere.start();
+
+        o = new Orbit(this, 50, 0, 1);
+        pushMatrix();
+        translate(cx, cy, 10);
+        ((Orbit) o).spawnSmallerOrbits(2, 1);
+        o.start();
+        popMatrix();
+     
+      
     }
 
     //Instantiates mutiple objects
@@ -242,8 +260,9 @@ public class AlexVisual extends Visual{
             }
         }
         if(on[7]){
-        
-         
+            //sphere.update();
+            sphere.update();
+            o.update();
         }
     }
 

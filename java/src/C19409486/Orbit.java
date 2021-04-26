@@ -2,7 +2,7 @@ package C19409486;
 
 import processing.core.PVector;
 
-public class Orbit {
+public class Orbit{
     float radius;
     float angle;
     float distance;
@@ -11,9 +11,9 @@ public class Orbit {
     PVector v;
     AlexVisual _av;
 
-    Orbit(AlexVisual av, float r, float d, float o){
+    public Orbit(AlexVisual av, float r, float d, float o){
         _av= av;
-        v= PVector.random3D();
+        v= new PVector(_av.getCx(), _av.getCy(), 10);
         radius = r;
         distance = d;
         v.mult(distance);
@@ -22,7 +22,7 @@ public class Orbit {
     }
 
     void orbit(){
-        angle = angle + orbitSpeed;
+        angle = angle + orbitSpeed/10;
         if(orbits[0] != null){
             for(int i =0; i < orbits.length; i++){
                 orbits[i].orbit();
@@ -44,35 +44,44 @@ public class Orbit {
           
         }
     }
-
+    
     public void start(){
+        this.spawnSmallerOrbits(5, 2);
+        _av.translate(_av.getCx(), _av.getCy(), 10);
+    }
+
+    public void update(){
+        PVector v2 = new PVector(_av.getCx(), _av.getCy(), 10);
+        PVector p = v.cross(v2);
+      
         _av.pushMatrix();
+        _av.camera();
         _av.noStroke();
-        _av.fill(255);
+        _av.fill(360, 100,100);
+        
+   
        // _av.translate(distance,0);
         //_av.rotate(angle);
-        _av.camera();
 
-        PVector v2 = new PVector(1,0, 1);
-        PVector p = v.cross(v2);
-        _av.rotate(angle, p.x, p.y, p.z);
-        
-        _av.translate(v.x, v.y, v.z);
+        //_av.rotate(angle, p.x, p.y, p.z);
+        _av.translate(v2.x, v2.y, v2.z);
+        _av.rotate(angle, v2.x, v2.y, v2.z);
+     
+        System.out.println(v2.x + " " + v2.y + " " + v2.z);
+        System.out.println(angle);
        // _av.fill(255);
         //_av.ellipse(0, 0, radius*2, radius*2);
-      
         _av.box(100);
+        _av.lights();
 
         if(orbits[0] != null){
             for(int i =0; i < orbits.length; i++){
                 orbits[i].start();
             }
         }
+       
+       
         _av.popMatrix();
-    }
-
-    public void update(){
-        this.spawnSmallerOrbits(5, 2);
         this.orbit();
     }
 }
