@@ -31,25 +31,17 @@ public class AlexVisual extends Visual{
     boolean[] on;
   
 
-    MusicObject aw, fw, c, mc, cube, b;
-    MusicObject sphere;
-
+    MusicObject aw, fw, c, mc, cube, b, sphere, coolCubes;
     MusicObject[] sbArray, sArray, bbArray;
 
-
-   
     boolean isDestroying=false;
 
     ArrayList<MusicObject> moList, cubesList;
 
-    
     int frameTarget;
-    //private PApplet orbits;
 
-    PeasyCam cam;
-    private Orbit rightOrbit;
-    //Terrain t;
-    private Orbit leftOrbit;
+    Orbit rightOrbit;
+    Orbit leftOrbit;
 
 
     public void settings()
@@ -102,18 +94,10 @@ public class AlexVisual extends Visual{
         fw = new FreqWave(this);
         c = new Circle(this);
 
-       
-
         mc = new MagicCircle(this);
-
-    
 
         bbArray = new BouncingCircle[5];
 
-        sArray = new Star[200];
-
-
-    
         reinstantiation();
 
         sphere = new Sphere(this);
@@ -122,15 +106,9 @@ public class AlexVisual extends Visual{
         rightOrbit = new Orbit(this, 50, 0, 0);
 
         rightOrbit.spawnOrbitObjects(4, 1);
-     
-        // pushMatrix();
-        
-        // PVector vect1 = new PVector(this.width, 0, 0);
-        // leftOrbit = new Orbit(this, vect1, 50, 0, 0);
-     
-        // popMatrix();
 
-        coolCube = new CoolCubes(this);
+
+        coolCubes = new CoolCubes(this);
     }
 
     //Instantiates mutiple objects
@@ -138,10 +116,6 @@ public class AlexVisual extends Visual{
         //Cubes
         for(int i=0; i< 5; i++){
             cubesList.add(new Cube(this, 0));
-        }
-        //Stars
-        for(int i=0; i<sArray.length; i++){
-            sArray[i] = new Star(this);
         }
         //Security Beam
         for(int i=0; i<sbArray.length; i++){
@@ -181,9 +155,8 @@ public class AlexVisual extends Visual{
         drawObjects();
     }
 
-    //Draw the objects
-    boolean haveOne = false;
-    private CoolCubes coolCube;
+
+   
     public void drawObjects(){
         background(0);
         noStroke();
@@ -265,7 +238,7 @@ public class AlexVisual extends Visual{
         }
         //Sphere
         if(on[7]){
-            sphere.update();
+            //sphere.update();
         }
         //Orbit
         if(on[8]){
@@ -274,9 +247,7 @@ public class AlexVisual extends Visual{
         }
         //Weird Cubes
         if(on[9]){
-          
-            coolCube.update();
-            
+            coolCubes.update();
             //t.update();
         }
     }
