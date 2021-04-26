@@ -67,8 +67,8 @@ public class AlexVisual extends Visual{
 
     public void setup()
     {
-        cx = width/2;//
-        cy = height/2;//
+        cx = width/2;
+        cy = height/2;
         println("cx: " + cx);
         println(cy);
         colorMode(HSB);
@@ -93,7 +93,6 @@ public class AlexVisual extends Visual{
 
         cubesList = new ArrayList<MusicObject>();
 
-        //stars = new Star[800];
         sbArray = new SecurityBeams[800];
         on = new boolean[10];
 
@@ -103,55 +102,40 @@ public class AlexVisual extends Visual{
         fw = new FreqWave(this);
         c = new Circle(this);
 
-     
-        //lights();
-        //o.start();
        
 
         mc = new MagicCircle(this);
 
-        //sides = new Sides(this);
+    
 
         bbArray = new BouncingCircle[5];
 
         sArray = new Star[200];
 
 
-      
-        
     
         reinstantiation();
 
         sphere = new Sphere(this);
         sphere.start();
 
-        // o = new Orbit(this, 50, 0, 1);
-        // pushMatrix();
-        // translate(cx, cy, 10);
-        // ((Orbit) o).spawnSmallerOrbits(2, 1);
-        // o.start();
-        //cam = new PeasyCam(this, 500);
         rightOrbit = new Orbit(this, 50, 0, 0);
 
         rightOrbit.spawnOrbitObjects(4, 1);
      
-   
-
-        pushMatrix();
+        // pushMatrix();
         
-        PVector vect1 = new PVector(this.width, 0, 0);
-        leftOrbit = new Orbit(this, vect1, 50, 0, 0);
-        //translate(500, 500, -10);
+        // PVector vect1 = new PVector(this.width, 0, 0);
+        // leftOrbit = new Orbit(this, vect1, 50, 0, 0);
      
-        popMatrix();
+        // popMatrix();
 
         coolCube = new CoolCubes(this);
-         //t =new Terrain(this);
-
     }
 
     //Instantiates mutiple objects
     public void reinstantiation(){
+        //Cubes
         for(int i=0; i< 5; i++){
             cubesList.add(new Cube(this, 0));
         }
@@ -254,21 +238,21 @@ public class AlexVisual extends Visual{
             fw.update();
         } 
         //The security beams
-        if(on[3]){//Problem
+        if(on[3]){
             for(int i=0;i< sbArray.length; i++){
                 sbArray[i].update();
                 sbArray[i].start();
             }
         }
         //Magic Circles Random appear and disappear?
-        if(on[4]){//prob
+        if(on[4]){
             for(int i=0; i < moList.size()-1; i++){
                 MusicObject temp= moList.get(i);
                 temp.update();
             }
         }
         //Circle Bouncing
-        if(on[5]){//prob
+        if(on[5]){
             for(int i=0; i < bbArray.length; i++){
                 bbArray[i].update();
             }
@@ -279,14 +263,16 @@ public class AlexVisual extends Visual{
                 cubesList.get(i).update();
             }
         }
+        //Sphere
         if(on[7]){
             sphere.update();
         }
+        //Orbit
         if(on[8]){
-           
-            rightOrbit.show();
+            rightOrbit.update();
             rightOrbit.orbit();
         }
+        //Weird Cubes
         if(on[9]){
           
             coolCube.update();

@@ -58,7 +58,7 @@ class Orbit {
       _orbitObjects = new Orbit[total];
       for (int i = 0; i < _orbitObjects.length; i++) {
         //float radius = _radius/(level*2);
-        
+
         //Create orbit objects using those parameter   
         float size = _size;
         float distance = _av.random((_size + size), (_size+size)*2);
@@ -74,7 +74,7 @@ class Orbit {
       }
     }
   
-    void show() {
+    void update() {
      // System.out.println(_v);
 
       _av.pushMatrix();
@@ -110,7 +110,7 @@ class Orbit {
       if (_orbitObjects != null) {
         for (int i = 0; i < _orbitObjects.length; i++) {
             //Make them orbit
-          _orbitObjects[i].show();
+          _orbitObjects[i].update();
         }
       }
       _av.popMatrix();

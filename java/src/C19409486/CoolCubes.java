@@ -10,10 +10,6 @@ public class CoolCubes extends Cube{
         this._av = av;
     }
 
-    public void start(){
-    
-    }
-
     public void update(){
         moveCube();
     }
@@ -23,7 +19,6 @@ public class CoolCubes extends Cube{
         _av.translate(_av.height, _av.width, 0);
         _av.calculateAverageAmplitude();
         _av.stroke(PApplet.map( _av.getSmoothedAmplitude(), 0, 1, 0, 255), 255, 255);
-       // _av.strokeWeight(5);
 
         _av.pushMatrix();
         _av.camera(); 
@@ -36,16 +31,13 @@ public class CoolCubes extends Cube{
                     _av.popMatrix();
                 }
             }
-        }
-     
-        // _av.rotateX(_angle);
-        // _av.rotateZ(_angle);  
-        // _av.box(boxSize);   
+        } 
         _av.lights();
         _av.popMatrix();
 
         _angle += 0.01f;
     }
+
 
     void randomBoxes(){
         _av.fill(_av.random(255));

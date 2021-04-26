@@ -34,15 +34,11 @@ public class Sphere extends MusicObject{
             ySpeed *=  -1;
         }else{
             ySpeed += gravity;
-           // System.out.println(ySpeed);
         }
 
-        // _av.stroke(100, 255, 255);
         _av.stroke(PApplet.map( _av.getSmoothedAmplitude(), 0, 1, 0, 255), 255, 255);
         _av.strokeWeight(5); 
-        //_av.noStroke();
         _av.noFill();
-        //_av.fill(255, 255, 255);
 
         _av.pushMatrix();
         _av.camera(); 
