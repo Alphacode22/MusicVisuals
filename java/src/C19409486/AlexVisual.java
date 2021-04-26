@@ -15,6 +15,7 @@ import ie.tudublin.Visual;
 import ie.tudublin.VisualException;
 import peasy.PeasyCam;
 import processing.core.PApplet;
+import processing.core.PVector;
 
 public class AlexVisual extends Visual{
 
@@ -35,7 +36,7 @@ public class AlexVisual extends Visual{
 
     MusicObject[] sbArray, sArray, bbArray;
 
-    Orbit o;
+
    
     boolean isDestroying=false;
 
@@ -46,6 +47,9 @@ public class AlexVisual extends Visual{
     //private PApplet orbits;
 
     PeasyCam cam;
+    private Orbit rightOrbit;
+    //Terrain t;
+    private Orbit leftOrbit;
 
 
     public void settings()
@@ -63,8 +67,8 @@ public class AlexVisual extends Visual{
 
     public void setup()
     {
-        cx = width /2;
-        cy = height/2;
+        cx = width/2;//
+        cy = height/2;//
         println("cx: " + cx);
         println(cy);
         colorMode(HSB);
@@ -91,7 +95,7 @@ public class AlexVisual extends Visual{
 
         //stars = new Star[800];
         sbArray = new SecurityBeams[800];
-        on = new boolean[9];
+        on = new boolean[10];
 
         lerpedBuffer = new float[width]; 
 
@@ -112,8 +116,8 @@ public class AlexVisual extends Visual{
 
         sArray = new Star[200];
 
-       // cam = new PeasyCam(this, 0);
-       
+
+      
         
     
         reinstantiation();
@@ -121,14 +125,29 @@ public class AlexVisual extends Visual{
         sphere = new Sphere(this);
         sphere.start();
 
-        o = new Orbit(this, 50, 0, 1);
-        pushMatrix();
-        translate(cx, cy, 10);
-        ((Orbit) o).spawnSmallerOrbits(2, 1);
-        o.start();
-        popMatrix();
+        // o = new Orbit(this, 50, 0, 1);
+        // pushMatrix();
+        // translate(cx, cy, 10);
+        // ((Orbit) o).spawnSmallerOrbits(2, 1);
+        // o.start();
+        //cam = new PeasyCam(this, 500);
+        rightOrbit = new Orbit(this, 50, 0, 0);
+
+        rightOrbit.spawnOrbitObjects(4, 1);
      
-      
+   
+
+        pushMatrix();
+        
+        PVector vect1 = new PVector(this.width, 0, 0);
+        leftOrbit = new Orbit(this, vect1, 50, 0, 0);
+        //translate(500, 500, -10);
+     
+        popMatrix();
+
+        coolCube = new CoolCubes(this);
+         //t =new Terrain(this);
+
     }
 
     //Instantiates mutiple objects
@@ -158,7 +177,7 @@ public class AlexVisual extends Visual{
     public void keyPressed()
     {
         //Between 0 and 9 keys
-        if (keyCode >= '0' && keyCode <= '7'){
+        if (keyCode >= '0' && keyCode <= '9'){
             mode = keyCode - '0';
             on[mode] = !on[mode];
         }
@@ -180,6 +199,7 @@ public class AlexVisual extends Visual{
 
     //Draw the objects
     boolean haveOne = false;
+    private CoolCubes coolCube;
     public void drawObjects(){
         background(0);
         noStroke();
@@ -260,9 +280,18 @@ public class AlexVisual extends Visual{
             }
         }
         if(on[7]){
-            //sphere.update();
             sphere.update();
-            o.update();
+        }
+        if(on[8]){
+           
+            rightOrbit.show();
+            rightOrbit.orbit();
+        }
+        if(on[9]){
+          
+            coolCube.update();
+            
+            //t.update();
         }
     }
 

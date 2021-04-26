@@ -7,8 +7,8 @@ public class Sphere extends MusicObject{
     float _x;
     float _y;
     float _z;
-    private float gravity=1;
-    private float ySpeed=-1;
+    private float gravity=-1;
+    private float ySpeed=1;
 
     public Sphere(AlexVisual av) {
         this._av = av;
@@ -19,10 +19,6 @@ public class Sphere extends MusicObject{
        
         //TODO Auto-generated constructor stub 
     }
-
-    // private Object randomiser(int i, int width) {
-    //     return null;
-    // }
 
     public void start(){
         _av.translate(_av.getCx(),_av.getCy(), _z);
@@ -50,7 +46,7 @@ public class Sphere extends MusicObject{
 
         _av.pushMatrix();
         _av.camera(); 
-        _av.translate(_av.getCx(),_y, _z);
+        _av.translate(randomiser(0, _av.width),_y, _z);
         _av.sphere(50);
         _av.lights();
         _av.popMatrix();
