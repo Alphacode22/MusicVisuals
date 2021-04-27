@@ -7,10 +7,12 @@ import processing.core.PApplet;
 
 public class Cube extends MusicObject {
     float _angle;
+    float _boxSide;
 
-    public Cube(AlexVisual av, float angle) {
+    public Cube(AlexVisual av, float angle, float boxSide) {
         this._av = av;
         this._angle = angle;
+        this._boxSide = boxSide;
     }
 
     public void start(){
@@ -25,7 +27,8 @@ public class Cube extends MusicObject {
         int min =0;
         int randInt = randomiser(min, _av.height);
         int randInt2 = randomiser(min,  _av.width);
-        float boxSize = 50 + (100 *  _av.getSmoothedAmplitude()); 
+
+        float boxSize = _boxSide + (100 *  _av.getSmoothedAmplitude()); 
 
         _av.calculateAverageAmplitude();
         _av.stroke(PApplet.map( _av.getSmoothedAmplitude(), 0, 1, 0, 255), 255, 255);

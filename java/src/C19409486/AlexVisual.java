@@ -40,9 +40,7 @@ public class AlexVisual extends Visual{
 
     int frameTarget;
 
-    Orbit rightOrbit;
-    Orbit leftOrbit;
-
+    Orbit rightOrbit, leftOrbit;
 
     public void settings()
     {
@@ -100,7 +98,7 @@ public class AlexVisual extends Visual{
 
         reinstantiation();
 
-        sphere = new Sphere(this);
+        sphere = new Sphere(this, cy, 0 , 1);
         sphere.start();
 
         rightOrbit = new Orbit(this, 50, 0, 0);
@@ -108,14 +106,14 @@ public class AlexVisual extends Visual{
         rightOrbit.spawnOrbitObjects(4, 1);
 
 
-        coolCubes = new CoolCubes(this);
+        coolCubes = new CoolCubes(this, 10, 50);
     }
 
     //Instantiates mutiple objects
     public void reinstantiation(){
         //Cubes
         for(int i=0; i< 5; i++){
-            cubesList.add(new Cube(this, 0));
+            cubesList.add(new Cube(this, 0, 50));
         }
         //Security Beam
         for(int i=0; i<sbArray.length; i++){
@@ -155,8 +153,6 @@ public class AlexVisual extends Visual{
         drawObjects();
     }
 
-
-   
     public void drawObjects(){
         background(0);
         noStroke();
@@ -238,7 +234,7 @@ public class AlexVisual extends Visual{
         }
         //Sphere
         if(on[7]){
-            //sphere.update();
+            sphere.update();
         }
         //Orbit
         if(on[8]){
@@ -248,7 +244,6 @@ public class AlexVisual extends Visual{
         //Weird Cubes
         if(on[9]){
             coolCubes.update();
-            //t.update();
         }
     }
 

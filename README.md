@@ -33,16 +33,12 @@ Sit back and relax
 - Each entity is drawn on the screen every frame
 
 # What I am most proud of in the assignment
-- Creating more complex shapes from easier shapes. I managed to create a more complex looking amplitude wave from the sin wave
-
-
-
-
+- Creating more complex shapes from easier shapes. I managed to create a more complex looking amplitude wave from the sin wave.
+- I manage an awesome cube display called cube part which is one of the highlights of my project.
+- I made a good attempt at learning PVectors from creating the Orbit part
 
 
 # Markdown Tutorial
-
-
 
 # References(Added Here)
 - Waves
@@ -60,7 +56,7 @@ https://www.youtube.com/watch?v=pRYMy5uQSpo
 - Bouncing Balls
 https://www.youtube.com/watch?v=YIKRXl3wH8Y
 
-- Solar System
+- Solar System 2
 https://www.youtube.com/watch?v=dncudkelNxw
 
 - Bouncing Balls 2
@@ -73,15 +69,8 @@ Music provided by NoCopyrightSounds
 Free Download/Stream: http://ncs.io/blank
 Watch: http://youtu.be/p7ZsBPK656s
 
-Song: Awake The Light - Borrtex
-Music provided by Borrtex
-Free Download/Stream: https://borrtex.bandcamp.com/
-Watch: https://www.youtube.com/watch?v=g20lxnMwcoM
-
 - Helpful links
 https://processing.org/reference/
-https://stackoverflow.com/questions/
-
 
 
 This is *emphasis*

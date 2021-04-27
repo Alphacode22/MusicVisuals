@@ -7,15 +7,15 @@ public class Sphere extends MusicObject{
     float _x;
     float _y;
     float _z;
-    private float gravity=-1;
-    private float ySpeed=1;
+    private float _gravity=-1;
+    private float _ySpeed=1;
 
-    public Sphere(AlexVisual av) {
+    public Sphere(AlexVisual av, float y, float z, float gravity) {
         this._av = av;
         this._x =randomiser(0, _av.width);
-        this._y = _av.getCy();
-        this._z = 0;
-        this.gravity = 1;
+        this._y = y;
+        this._z = z;
+        this._gravity = gravity;
        
         //TODO Auto-generated constructor stub 
     }
@@ -31,9 +31,9 @@ public class Sphere extends MusicObject{
     void drawSpheres(){
   
         if(_y > _av.height || _y <0){
-            ySpeed *=  -1;
+            _ySpeed *=  -1;
         }else{
-            ySpeed += gravity;
+            _ySpeed += _gravity;
         }
 
         _av.stroke(PApplet.map( _av.getSmoothedAmplitude(), 0, 1, 0, 255), 255, 255);
@@ -42,11 +42,11 @@ public class Sphere extends MusicObject{
 
         _av.pushMatrix();
         _av.camera(); 
-        _av.translate(randomiser(0, _av.width),_y, _z);
+        _av.translate((_av.width /2) + 10,_y, _z);
         _av.sphere(50);
         _av.lights();
         _av.popMatrix();
 
-        _y += ySpeed; 
+        _y += _ySpeed; 
     }
 }

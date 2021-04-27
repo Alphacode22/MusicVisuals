@@ -92,10 +92,10 @@ class Orbit {
       //Gets cross product which is the pendicular line that the orbiter object rotate around
       PVector p = _v.cross(v2);  // A x B = AB
 
-      //Rotate with the pendicular line
+      //Rotate with the pendicular line AB
       _av.rotate(_angle, p.x, p.y, p.z);
 
-      //Move with the pendicular line
+      //Move with the pendicular line AB
       _av.translate(_v.x, _v.y, _v.z);
 
       _av.noStroke();

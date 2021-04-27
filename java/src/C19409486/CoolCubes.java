@@ -4,18 +4,21 @@ import processing.core.PApplet;
 
 public class CoolCubes extends Cube{
     float _angle;
+    float _boxSide;
 
-    public CoolCubes(AlexVisual av) {
-        super(av, 10);
+    public CoolCubes(AlexVisual av, float angle, float boxSize) {
+        super(av, angle, boxSize);
         this._av = av;
+        this._angle = angle;
+        this._boxSide = boxSize;
     }
 
     public void update(){
-        moveCube();
+        moveCoolCubes();
     }
 
-    public void moveCube(){
-        float boxSize = 50 + (100 *  _av.getSmoothedAmplitude()); 
+    public void moveCoolCubes(){
+        float boxSize = _boxSide + (100 *  _av.getSmoothedAmplitude()); 
         _av.translate(_av.height, _av.width, 0);
         _av.calculateAverageAmplitude();
         _av.stroke(PApplet.map( _av.getSmoothedAmplitude(), 0, 1, 0, 255), 255, 255);
