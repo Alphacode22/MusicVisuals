@@ -14,7 +14,7 @@ public class CubeVisual1 extends Visual
     {
         startMinim();
         //startListening();
-        loadAudio("heroplanet.mp3");
+        loadAudio("Disfigure.mp3");
         colorMode(HSB);
     }
 
