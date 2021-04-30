@@ -2,20 +2,8 @@ package C19409486;
 
 import java.util.ArrayList;
 
-import ddf.minim.AudioBuffer;
-import ddf.minim.AudioInput;
-import ddf.minim.AudioPlayer;
-import ddf.minim.Minim;
-import ddf.minim.analysis.FFT;
-import ddf.minim.analysis.FourierTransform;
-import example.AudioBandsVisual;
-import example.WaveForm;
-import ie.tudublin.Main;
 import ie.tudublin.Visual;
 import ie.tudublin.VisualException;
-import peasy.PeasyCam;
-import processing.core.PApplet;
-import processing.core.PVector;
 
 public class AlexVisual extends Visual{
 
