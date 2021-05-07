@@ -8,6 +8,7 @@ import example.RotatingAudioBands;
 
 public class Main
 {	
+	
 	public static AlexVisual av = new AlexVisual();
 	public void startUI()
 	{
