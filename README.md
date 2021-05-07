@@ -20,7 +20,7 @@ Fork the Project and clone into your local computer
 Press F5 to run the program
 Play the music and watch the shape transform
 Press the spacebar to start the music or stop it
-Each entity connect on the keypad from 0 to 7. They are either in a on and off state.
+Each entity connect on the keypad from 0 to 9. They are either in a on and off state.
 Turn each of the entities on and off
 There are a couple of entities I have designed to visualise the music
 Watch them interact with the music
